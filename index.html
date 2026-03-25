@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikunj Jewellery | Vedic Navratan Gems</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-bright: #f9d71c;
+            --navy: #0a0e14;
+            --navy-light: #161c24;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+
+        /* --- Animations --- */
+        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes ringPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--navy); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(10,14,20,0.9), transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo img {
+            height: 40px;
+            filter: drop-shadow(0 0 5px var(--gold));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            font-size: 1.2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover { color: var(--gold); }
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a2332 0%, #0a0e14 100%);
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .animated-rings {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 2;
+        }
+
+        .ring-1 { animation: ringPulse 4s infinite linear; }
+        .ring-2 { animation: ringPulse 4s infinite linear 2s; }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--gold), #fff, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1s ease 0.3s backwards;
+        }
+
+        .cta-btn {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 2px;
+            animation: fadeIn 1s ease 0.6s backwards;
+        }
+
+        .cta-btn:hover {
+            background: var(--gold-bright);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* --- Marquee --- */
+        .marquee {
+            background: var(--navy-light);
+            padding: 2rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: 200%;
+            animation: scroll 30s linear infinite;
+        }
+
+        .marquee-item {
+            flex: 0 0 10%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-item svg {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .marquee-item span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* --- AI Section --- */
+        .ai-prompt-section {
+            background: linear-gradient(45deg, #0d121b, #1a2332);
+            border-radius: 20px;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .prompt-input-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .prompt-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--gold);
+            padding: 1.5rem 2rem;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            outline: none;
+        }
+
+        .prompt-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gold);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .pill {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .pill:hover { background: var(--gold); color: var(--navy); }
+
+        /* --- Collection Grid --- */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .stone-card {
+            background: var(--navy-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stone-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .stone-card svg {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        .stone-card h3 { margin-bottom: 0.5rem; color: var(--gold); }
+        .stone-card .sanskrit { font-size: 0.9rem; color: #888; font-style: italic; }
+        .stone-card .price { font-weight: 700; color: #fff; margin-top: 1rem; display: block; }
+
+        /* --- Modal System --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--navy-light);
+            border: 1px solid var(--gold);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gold);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #05070a;
+            padding: 5rem 5% 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 { color: var(--gold); margin-bottom: 1.5rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: #888; text-decoration: none; transition: var(--transition); }
+        .footer-col ul li a:hover { color: var(--gold); padding-left: 5px; }
+
+        /* --- Admin Panel --- */
+        .admin-modal {
+            max-width: 1200px;
+        }
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
+        }
+        .admin-nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .admin-nav-item.active { border-color: var(--gold); color: var(--gold); }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            nav { padding: 1rem 5%; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <img src="logo.png" alt="Nikunj Logo">
+            <span class="brand-font">Nikunj</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#ai">AI Match</a></li>
+            <li><a href="#heritage">Heritage</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="icon-btn" onclick="toggleModal('authModal')">👤</button>
+            <button class="icon-btn" onclick="toggleModal('cartModal')">
+                🛒 <span class="badge" id="cart-count">0</span>
+            </button>
+            <button class="icon-btn" onclick="toggleModal('adminModal')">⚙️</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img src="hero_bg.png" class="hero-bg-img" alt="Luxury Gems">
+        <div class="animated-rings ring-1"></div>
+        <div class="animated-rings ring-2"></div>
+        <div class="hero-content">
+            <h1>Destiny in Every Gem</h1>
+            <p>Unlock the cosmic powers of Vedic Navratan stones. Handpicked, energized, and ethically sourced from the earth's deepest reaches to your soul.</p>
+            <button class="cta-btn" onclick="scrollToSection('collection')">Explore Collection</button>
+        </div>
+    </div>
+
+    <div class="marquee">
+        <div class="marquee-track" id="marquee-track">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <section id="ai">
+        <div class="section-header">
+            <h2>AI Gemstone Recommendations</h2>
+            <p>Tell us your deepest aspirations, and let the stars guide your match.</p>
+        </div>
+        <div class="ai-prompt-section">
+            <div class="prompt-input-container">
+                <input type="text" class="prompt-input" id="ai-prompt" placeholder="I am looking for healing and inner peace...">
+                <button class="prompt-btn" onclick="aiSearch()">Recommend</button>
+            </div>
+            <div class="pills">
+                <span class="pill" onclick="setPrompt('Wealth & Prosperity')">Wealth</span>
+                <span class="pill" onclick="setPrompt('Love & Relationship')">Love</span>
+                <span class="pill" onclick="setPrompt('Protection from Negativity')">Protection</span>
+                <span class="pill" onclick="setPrompt('Healing & Health')">Healing</span>
+                <span class="pill" onclick="setPrompt('Confidence & Self Esteem')">Confidence</span>
+                <span class="pill" onclick="setPrompt('Spiritual Growth')">Spiritual</span>
+                <span class="pill" onclick="setPrompt('Better Focus in Studies')">Education</span>
+                <span class="pill" onclick="setPrompt('Success in Business')">Success</span>
+            </div>
+            <div id="ai-result" style="margin-top: 2rem; text-align: center; color: var(--gold); font-weight: 600;"></div>
+        </div>
+    </section>
+
+    <section id="collection">
+        <div class="section-header">
+            <h2>9 Divine Stones</h2>
+            <p>The Navratna - Nine Planetary Gemstones for cosmic balance.</p>
+        </div>
+        <div class="collection-grid" id="gem-grid">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <section id="heritage" style="background: var(--navy-light);">
+        <div class="section-header">
+            <h2>Heritage of Authenticity</h2>
+            <p>Generations of mastery in planetary gemology.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem; text-align:center;">
+            <div style="padding:2rem; border:1px solid var(--glass-border); background:var(--navy);">
+                <div style="font-size:3rem; margin-bottom:1rem;">🔱</div>
+                <h3 style="color:var(--gold); margin-bottom:1rem;">Vedic Certification</h3>
+                <p style="color:#888; font-size:0.9rem;">Every stone is analyzed for its 'Prana' and planetary alignment by certified astrologers.</p>
+            </div>
+            <div style="padding:2rem; border:1px solid var(--gold); background:var(--navy); transform:scale(1.1); z-index:2;">
+                <div style="font-size:3rem; margin-bottom:1rem;">🏢</div>
+                <h3 style="color:var(--gold); margin-bottom:1rem;">Ethical Sourcing</h3>
+                <p style="color:#888; font-size:0.9rem;">Direct mining partnerships ensuring conflict-free, earth-reverent extraction processes.</p>
+            </div>
+            <div style="padding:2rem; border:1px solid var(--glass-border); background:var(--navy);">
+                <div style="font-size:3rem; margin-bottom:1rem;">✨</div>
+                <h3 style="color:var(--gold); margin-bottom:1rem;">Energized Gems</h3>
+                <p style="color:#888; font-size:0.9rem;">Before delivery, gems undergo traditional purification rituals under auspicious planetary hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 class="brand-font">Nikunj</h4>
+                <p style="font-size: 0.9rem; color: #888;">Modern Vedic astrology meets artisan jewellery design. Authentically sourced, cosmically aligned.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">The Collection</a></li>
+                    <li><a href="#">Loose Stones</a></li>
+                    <li><a href="#">Custom Setting</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Stone Care</a></li>
+                    <li><a href="#">Authenticity</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <p style="font-size: 0.9rem; color: #888;">123 Jewelers Lane, Gold City.<br>contact@nikunj.com</p>
+            </div>
+        </div>
+        <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem; text-align: center; color: #555; font-size: 0.8rem;">
+            &copy; 2026 Nikunj Jewellery. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal('authModal')">&times;</span>
+            <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
+                <h2 onclick="toggleAuthTab('signin')" id="tab-signin" style="cursor: pointer; opacity: 1;">Sign In</h2>
+                <h2 onclick="toggleAuthTab('register')" id="tab-register" style="cursor: pointer; opacity: 0.5;">Register</h2>
+            </div>
+            <div id="signin-form">
+                <input type="email" placeholder="Email" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="password" placeholder="Password" style="width:100%; padding:1rem; margin-bottom:2rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <button class="cta-btn" style="width:100%" onclick="login()">Enter the Vault</button>
+            </div>
+            <div id="register-form" style="display: none;">
+                <input type="text" placeholder="Full Name" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="date" placeholder="Birth Date" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="time" placeholder="Birth Time" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="text" placeholder="Birth City" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <button class="cta-btn" style="width:100%" onclick="register()">Create Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stone Detail Modal -->
+    <div id="stoneModal" class="modal-overlay">
+        <div class="modal-content" id="stone-modal-body">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    <!-- Cart Modal (Your Vault) -->
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal('cartModal')">&times;</span>
+            <h2 class="brand-font" style="margin-bottom: 2rem; color: var(--gold);">Your Vault</h2>
+            <div id="cart-items" style="margin-bottom: 2rem;">
+                <!-- Items go here -->
+            </div>
+            <div style="border-top: 1px solid var(--glass-border); padding-top: 1rem; text-align: right;">
+                <h3 id="cart-total" style="color: var(--gold); margin-bottom: 1rem;">Total: $0</h3>
+                <button class="cta-btn" onclick="checkout()">Secure Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-content admin-modal">
+            <span class="close-modal" onclick="toggleModal('adminModal')">&times;</span>
+            <h2 class="brand-font" style="margin-bottom: 2rem; color: var(--gold);">Sanctum Control</h2>
+            <div class="admin-nav">
+                <div class="admin-nav-item active" onclick="switchAdminTab('dashboard')">Dashboard</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('inventory')">Inventory</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('orders')">Orders</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('customers')">Customers</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('analytics')">Analytics</div>
+                <div class="admin-nav-item" onclick="switchAdminTab('settings')">Settings</div>
+            </div>
+            <div id="admin-body">
+                <!-- Tab weights -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const stones = [
+            { id: 1, name: "Ruby", sanskrit: "Manikya", planet: "Sun", chakra: "Root", color: "#e0115f", price: 1200, stock: 4, origin: "Burma", hardness: 9, tags: ["Success", "Power", "Fame", "Wealth"], desc: "The king of gems, Manikya bestows authority, energy, and royal radiance." },
+            { id: 2, name: "Pearl", sanskrit: "Moti", planet: "Moon", chakra: "Swadhisthana", color: "#fefdfa", price: 450, stock: 12, origin: "Basra", hardness: 3.5, tags: ["Peace", "Emotional stability", "Femininity", "Healing"], desc: "Soothing lunar energy to calm the mind and bring domestic harmony." },
+            { id: 3, name: "Red Coral", sanskrit: "Moonga", planet: "Mars", chakra: "Sacral", color: "#ff4433", price: 300, stock: 8, origin: "Italy", hardness: 3.5, tags: ["Courage", "Protection", "Energy", "Vitality"], desc: "Boosts stamina and provides divine protection from adversaries." },
+            { id: 4, name: "Emerald", sanskrit: "Panna", planet: "Mercury", chakra: "Heart", color: "#50c878", price: 1500, stock: 3, origin: "Zambia", hardness: 7.5, tags: ["Communication", "Focus", "Knowledge", "Healing"], desc: "Enhances intellect, memory, and powers of speech." },
+            { id: 5, name: "Yellow Sapphire", sanskrit: "Pukhraj", planet: "Jupiter", chakra: "Solar Plexus", color: "#f9d71c", price: 2000, stock: 5, origin: "Ceylon", hardness: 9, tags: ["Wealth", "Prosperity", "Marriage", "Spirituality"], desc: "The ultimate stone for divine grace, wisdom, and material success." },
+            { id: 6, name: "Diamond", sanskrit: "Heera", planet: "Venus", chakra: "Third Eye", color: "#ffffff", price: 5000, stock: 2, origin: "Golconda", hardness: 10, tags: ["Love", "Luxury", "Beauty", "Partnership"], desc: "Exquisite brilliance for ultimate refinement and romantic success." },
+            { id: 7, name: "Blue Sapphire", sanskrit: "Neelam", planet: "Saturn", chakra: "Throat", color: "#00308f", price: 2500, stock: 1, origin: "Kashmir", hardness: 9, tags: ["Discipline", "Focus", "Protection", "Intuition"], desc: "A powerful, transformative gem for profound karmic alignment." },
+            { id: 8, name: "Hessonite", sanskrit: "Gomed", planet: "Rahu", chakra: "Crown", color: "#cd7f32", price: 600, stock: 9, origin: "Africa", hardness: 7, tags: ["Confidence", "Success", "Ambition", "Wealth"], desc: "Overcomes obstacles and clears illusions on the path to victory." },
+            { id: 9, name: "Cat's Eye", sanskrit: "Lehsunia", planet: "Ketu", chakra: "Chakra Balancer", color: "#808000", price: 750, stock: 6, origin: "Brazil", hardness: 8.5, tags: ["Spiritual", "Protection", "Introspection", "Healing"], desc: "A mystical talisman for spiritual awakening and supernatural protection." }
+        ];
+
+        let cart = [];
+        let wishlist = [];
+
+        function getGemSVG(color, size = 120) {
+            return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" style="color: ${color}">
+                <defs>
+                    <radialGradient id="grad-${color.replace('#','')}" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" style="stop-color:${color};stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#000;stop-opacity:1" />
+                    </radialGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                </defs>
+                <path d="M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" fill="url(#grad-${color.replace('#','')})" stroke="white" stroke-width="0.5" filter="url(#glow)" />
+                <path d="M50 5 L50 95 M85 25 L15 75 M85 75 L15 25" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" />
+                <path d="M50 30 L65 50 L50 70 L35 50 Z" fill="rgba(255,255,255,0.1)" />
+            </svg>`;
+        }
+
+        function renderCollection() {
+            const grid = document.getElementById('gem-grid');
+            grid.innerHTML = stones.map(stone => `
+                <div class="stone-card" onclick="openStoneModal(${stone.id})">
+                    ${getGemSVG(stone.color)}
+                    <div class="sanskrit">${stone.sanskrit}</div>
+                    <h3>${stone.name}</h3>
+                    <div class="planet-info" style="font-size:0.8rem; color:var(--gold)">Planet: ${stone.planet}</div>
+                    <span class="price">$${stone.price.toLocaleString()}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderMarquee() {
+            const track = document.getElementById('marquee-track');
+            const items = [...stones, ...stones].map(stone => `
+                <div class="marquee-item">
+                    ${getGemSVG(stone.color, 40)}
+                    <span>${stone.name}</span>
+                </div>
+            `).join('');
+            track.innerHTML = items;
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setPrompt(text) {
+            document.getElementById('ai-prompt').value = text;
+        }
+
+        function aiSearch() {
+            const prompt = document.getElementById('ai-prompt').value.toLowerCase();
+            const resultDiv = document.getElementById('ai-result');
+            
+            if (!prompt) return;
+
+            // Simple heuristic matching
+            let bestMatch = stones[0];
+            let maxScore = 0;
+
+            stones.forEach(stone => {
+                let score = 0;
+                stone.tags.forEach(tag => {
+                    if (prompt.includes(tag.toLowerCase())) score += 2;
+                });
+                if (prompt.includes(stone.name.toLowerCase())) score += 5;
+                if (prompt.includes(stone.planet.toLowerCase())) score += 1;
+                
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = stone;
+                }
+            });
+
+            resultDiv.innerHTML = `Our stars suggest the ${bestMatch.name} for you. Recommending...`;
+            setTimeout(() => {
+                openStoneModal(bestMatch.id);
+                resultDiv.innerHTML = "";
+            }, 1000);
+        }
+
+        const modals = ['authModal', 'cartModal', 'adminModal', 'stoneModal'];
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            } else {
+                modals.forEach(m => {
+                    const el = document.getElementById(m);
+                    if (el) el.style.display = 'none';
+                });
+                modal.style.display = 'flex';
+            }
+        }
+
+        function toggleAuthTab(tab) {
+            const signin = document.getElementById('signin-form');
+            const register = document.getElementById('register-form');
+            const tSignin = document.getElementById('tab-signin');
+            const tRegister = document.getElementById('tab-register');
+            
+            if (tab === 'signin') {
+                signin.style.display = 'block';
+                register.style.display = 'none';
+                tSignin.style.opacity = '1';
+                tRegister.style.opacity = '0.5';
+            } else {
+                signin.style.display = 'none';
+                register.style.display = 'block';
+                tSignin.style.opacity = '0.5';
+                tRegister.style.opacity = '1';
+            }
+        }
+
+        let currentUser = null;
+
+        function login() {
+            const email = document.querySelector('#signin-form input[type="email"]').value;
+            if (!email) return alert("Please enter credentials.");
+            currentUser = { email, name: email.split('@')[0], tier: 'Gold' };
+            toggleModal('authModal');
+            alert(`Welcome back, ${currentUser.name}. Your karmic vault is ready.`);
+            document.querySelector('.nav-actions .icon-btn:first-child').innerHTML = "✨";
+        }
+
+        function register() {
+            const name = document.querySelector('#register-form input[placeholder="Full Name"]').value;
+            if (!name) return alert("Please enter your details.");
+            currentUser = { name, email: 'new_user@mail.com', tier: 'Silver' };
+            toggleModal('authModal');
+            alert(`Welcome, ${name}. Your astrological journey begins now.`);
+            document.querySelector('.nav-actions .icon-btn:first-child').innerHTML = "✨";
+        }
+
+        function openStoneModal(id) {
+            const stone = stones.find(s => s.id === id);
+            const content = document.getElementById('stone-modal-body');
+            const isWishlisted = wishlist.includes(id);
+            
+            content.innerHTML = `
+                <span class="close-modal" onclick="toggleModal('stoneModal')">&times;</span>
+                <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem;">
+                    <div style="text-align:center;">
+                        ${getGemSVG(stone.color, 300)}
+                        <h1 style="color:var(--gold); margin-top:1rem;">${stone.sanskrit}</h1>
+                    </div>
+                    <div>
+                        <h2 style="font-size:3rem; margin-bottom:0.5rem;">${stone.name}</h2>
+                        <p style="color:var(--gold); font-size:1.2rem; margin-bottom:1rem;">Planet: ${stone.planet} | Chakra: ${stone.chakra}</p>
+                        <p style="margin-bottom:2rem; color:#ccc;">${stone.desc}</p>
+                        <ul style="list-style:none; margin-bottom:2rem; color:#888; font-size:0.9rem;">
+                            <li>Origin: ${stone.origin}</li>
+                            <li>Hardness: ${stone.hardness} Mohs</li>
+                            <li>Stock: ${stone.stock} units available</li>
+                        </ul>
+                        <div style="display:flex; gap:1rem; align-items:center;">
+                            <h3 style="font-size:2rem;">$${stone.price.toLocaleString()}</h3>
+                            <input type="number" id="stone-qty" value="1" min="1" max="${stone.stock}" style="width:60px; padding:0.5rem; background:transparent; border:1px solid var(--gold); color:white;">
+                            <button class="cta-btn" onclick="addToCart(${stone.id})">Add to Cart</button>
+                            <button class="icon-btn" style="font-size:2rem; color:${isWishlisted ? 'var(--gold)' : 'white'}" onclick="toggleWishlist(${stone.id})">
+                                ${isWishlisted ? '❤️' : '♡'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            toggleModal('stoneModal');
+        }
+
+        function addToCart(id) {
+            const stone = stones.find(s => s.id === id);
+            const qty = parseInt(document.getElementById('stone-qty').value) || 1;
+            
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ ...stone, qty });
+            }
+            
+            updateCartUI();
+            alert(`${stone.name} added to your vault.`);
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
+            const totalEl = document.getElementById('cart-total');
+            
+            let total = 0;
+            let itemCount = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='color:#666;'>Your vault is empty. Every journey begins with a single stone.</p>";
+            } else {
+                container.innerHTML = cart.map(item => {
+                    total += item.price * item.qty;
+                    itemCount += item.qty;
+                    return `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:1px solid var(--glass-border); padding-bottom:1rem;">
+                            <div style="display:flex; gap:1rem; align-items:center;">
+                                ${getGemSVG(item.color, 50)}
+                                <div>
+                                    <h4 style="margin:0">${item.name}</h4>
+                                    <span style="font-size:0.8rem; color:#888;">$${item.price} x ${item.qty}</span>
+                                </div>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#f44; cursor:pointer;">Remove</button>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            count.innerText = itemCount;
+            totalEl.innerText = `Total: $${total.toLocaleString()}`;
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function toggleWishlist(id) {
+            const idx = wishlist.indexOf(id);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+            } else {
+                wishlist.push(id);
+            }
+            openStoneModal(id); // Refresh modal to show filled heart
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert("Your vault is empty.");
+            alert("Redirecting to our secure sacred payment portal...");
+            cart = [];
+            updateCartUI();
+            toggleModal('cartModal');
+        }
+
+        function switchAdminTab(tab) {
+            const body = document.getElementById('admin-body');
+            const items = document.querySelectorAll('.admin-nav-item');
+            items.forEach(i => i.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let html = "";
+            switch(tab) {
+                case 'dashboard':
+                    html = `
+                        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; margin-bottom:2rem;">
+                            <div style="background:var(--navy); padding:1.5rem; border-radius:10px;">
+                                <h4 style="color:#888">Revenue</h4>
+                                <h2 style="color:var(--gold)">$48,250</h2>
+                            </div>
+                            <div style="background:var(--navy); padding:1.5rem; border-radius:10px;">
+                                <h4 style="color:#888">Orders</h4>
+                                <h2 style="color:var(--gold)">142</h2>
+                            </div>
+                            <div style="background:var(--navy); padding:1.5rem; border-radius:10px;">
+                                <h4 style="color:#888">Wishlist Hits</h4>
+                                <h2 style="color:var(--gold)">843</h2>
+                            </div>
+                            <div style="background:var(--navy); padding:1.5rem; border-radius:10px;">
+                                <h4 style="color:#888">Conversion</h4>
+                                <h2 style="color:var(--gold)">3.4%</h2>
+                            </div>
+                        </div>
+                        <h3>Recent Orders</h3>
+                        <table style="width:100%; text-align:left; border-collapse:collapse; margin-top:1rem;">
+                            <tr style="color:#888; border-bottom:1px solid var(--glass-border);">
+                                <th style="padding:0.5rem;">ID</th><th style="padding:0.5rem;">Stone</th><th style="padding:0.5rem;">Price</th><th style="padding:0.5rem;">Status</th>
+                            </tr>
+                            <tr><td style="padding:0.5rem;">#NKJ-1022</td><td style="padding:0.5rem;">Panna</td><td style="padding:0.5rem;">$1,500</td><td style="padding:0.5rem; color:#50c878;">Shipped</td></tr>
+                            <tr><td style="padding:0.5rem;">#NKJ-1023</td><td style="padding:0.5rem;">Manikya</td><td style="padding:0.5rem;">$1,200</td><td style="padding:0.5rem; color:var(--gold);">Processing</td></tr>
+                        </table>
+                    `;
+                    break;
+                case 'inventory':
+                    html = `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                            <h3>Inventory Management</h3>
+                            <button class="pill" onclick="alert('Form opened')">+ Add New Stone</button>
+                        </div>
+                        <div style="background:var(--navy); padding:1.5rem; border-radius:10px; margin-bottom:2rem; border:1px solid var(--glass-border);">
+                            <h4 style="margin-bottom:1rem;">Quick Add / Edit</h4>
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+                                <input type="text" placeholder="Stone Name" style="padding:0.5rem; background:transparent; border:1px solid var(--gold); color:white;">
+                                <input type="number" placeholder="Price" style="padding:0.5rem; background:transparent; border:1px solid var(--gold); color:white;">
+                                <input type="number" placeholder="Stock" style="padding:0.5rem; background:transparent; border:1px solid var(--gold); color:white;">
+                            </div>
+                            <button class="cta-btn" style="margin-top:1rem; padding:0.5rem 1rem;">Save Stone</button>
+                        </div>
+                        <table style="width:100%; text-align:left; border-collapse:collapse;">
+                            <tr style="color:#888; border-bottom:1px solid var(--glass-border);">
+                                <th style="padding:0.5rem;">Stone</th><th style="padding:0.5rem;">Stock</th><th style="padding:0.5rem;">Status</th><th style="padding:0.5rem;">Actions</th>
+                            </tr>
+                            ${stones.map(s => `
+                                <tr>
+                                    <td style="padding:0.5rem;">${s.name}</td>
+                                    <td style="padding:0.5rem;">${s.stock}</td>
+                                    <td style="padding:0.5rem; color:${s.stock > 5 ? '#50c878' : '#e0115f'}">${s.stock > 5 ? 'Stable' : 'Low'}</td>
+                                    <td style="padding:0.5rem;"><button style="background:var(--gold); border:none; padding:2px 8px; border-radius:3px; cursor:pointer;">Edit</button></td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    `;
+                    break;
+                case 'analytics':
+                    html = `<h3>Stone Popularity</h3>
+                    <div style="margin-top:1rem;">
+                        ${stones.slice(0, 5).map(s => `
+                            <div style="margin-bottom:1rem;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>${s.name}</span><span>${Math.floor(Math.random()*100)}%</span></div>
+                                <div style="width:100%; height:10px; background:var(--navy); border-radius:5px;">
+                                    <div style="width:${Math.floor(Math.random()*80 + 20)}%; height:100%; background:var(--gold); border-radius:5px;"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                    break;
+                case 'orders':
+                    html = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                            <h3>Orders Management</h3>
+                            <button class="pill">Export CSV</button>
+                        </div>
+                        <table style="width:100%; text-align:left; border-collapse:collapse;">
+                            <tr style="color:#888; border-bottom:1px solid var(--glass-border);">
+                                <th style="padding:0.5rem;">Date</th><th style="padding:0.5rem;">Customer</th><th style="padding:0.5rem;">Amount</th><th style="padding:0.5rem;">Status</th>
+                            </tr>
+                            <tr><td style="padding:0.5rem;">Mar 24</td><td style="padding:0.5rem;">Aravind Sharma</td><td style="padding:0.5rem;">$2,450</td><td style="padding:0.5rem; color:#50c878;">Paid</td></tr>
+                            <tr><td style="padding:0.5rem;">Mar 23</td><td style="padding:0.5rem;">Sriya Gupta</td><td style="padding:0.5rem;">$1,200</td><td style="padding:0.5rem; color:var(--gold);">Pending</td></tr>
+                            <tr><td style="padding:0.5rem;">Mar 22</td><td style="padding:0.5rem;">John Doe</td><td style="padding:0.5rem;">$5,000</td><td style="padding:0.5rem; color:#888;">Cancelled</td></tr>
+                        </table>
+                    `;
+                    break;
+                case 'customers':
+                    html = `
+                        <h3>Customer Registry</h3>
+                        <div style="margin-top:1rem;">
+                            <div style="padding:1rem; border-bottom:1px solid var(--glass-border); display:flex; justify-content:space-between;">
+                                <span>Rohan Varma <span style="font-size:0.7rem; background:var(--gold); color:var(--navy); padding:2px 5px; border-radius:3px; margin-left:10px;">Platinum</span></span>
+                                <span style="color:#888">12 Orders</span>
+                            </div>
+                            <div style="padding:1rem; border-bottom:1px solid var(--glass-border); display:flex; justify-content:space-between;">
+                                <span>Meera Rao <span style="font-size:0.7rem; background:#888; color:var(--navy); padding:2px 5px; border-radius:3px; margin-left:10px;">Silver</span></span>
+                                <span style="color:#888">3 Orders</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'settings':
+                    html = `
+                        <h3>Store Configuration</h3>
+                        <div style="margin-top:1rem; display:grid; gap:1rem;">
+                            <div>
+                                <label style="display:block; color:#888; font-size:0.8rem;">Store Name</label>
+                                <input type="text" value="Nikunj Jewellery" style="width:100%; padding:0.8rem; background:var(--navy); border:1px solid var(--glass-border); color:white;">
+                            </div>
+                            <div>
+                                <label style="display:block; color:#888; font-size:0.8rem;">Currency</label>
+                                <select style="width:100%; padding:0.8rem; background:var(--navy); border:1px solid var(--glass-border); color:white;">
+                                    <option>USD ($)</option>
+                                    <option>INR (₹)</option>
+                                </select>
+                            </div>
+                            <button class="cta-btn">Save Changes</button>
+                        </div>
+                    `;
+                    break;
+                default:
+                    html = `<div style="padding:2rem; color:#888; text-align:center;">Tab content for ${tab} coming soon...</div>`;
+            }
+            body.innerHTML = html;
+        }
+
+        // Initialize state
+        window.onload = () => {
+            renderCollection();
+            renderMarquee();
+            switchAdminTab('dashboard');
+        };
+    </script>
+</body>
+</html>
