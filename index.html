@@ -575,16 +575,25 @@
                 <h2 onclick="toggleAuthTab('register')" id="tab-register" style="cursor: pointer; opacity: 0.5;">Register</h2>
             </div>
             <div id="signin-form">
-                <input type="email" placeholder="Email" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
-                <input type="password" placeholder="Password" style="width:100%; padding:1rem; margin-bottom:2rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="email" id="login-email" placeholder="Email" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="password" id="login-pwd" placeholder="Password" style="width:100%; padding:1rem; margin-bottom:2rem; background:transparent; border:1px solid var(--gold); color:white;">
                 <button class="cta-btn" style="width:100%" onclick="login()">Enter the Vault</button>
             </div>
             <div id="register-form" style="display: none;">
-                <input type="text" placeholder="Full Name" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
-                <input type="date" placeholder="Birth Date" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
-                <input type="time" placeholder="Birth Time" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
-                <input type="text" placeholder="Birth City" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="text" id="reg-name" placeholder="Full Name" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="date" id="reg-date" placeholder="Birth Date" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="time" id="reg-time" placeholder="Birth Time" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
+                <input type="text" id="reg-city" placeholder="Birth City" style="width:100%; padding:1rem; margin-bottom:1rem; background:transparent; border:1px solid var(--gold); color:white;">
                 <button class="cta-btn" style="width:100%" onclick="register()">Create Profile</button>
+            </div>
+            <div id="user-profile" style="display: none; text-align: center;">
+                <div style="font-size: 4rem; color: var(--gold);">🔱</div>
+                <h2 id="profile-name" class="brand-font" style="margin-bottom: 1rem;"></h2>
+                <div id="cosmic-insight" style="background: var(--navy); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid var(--glass-border);">
+                    <h3 style="color: var(--gold); margin-bottom: 0.5rem;">Cosmic Alignment</h3>
+                    <p id="insight-text" style="color: #888; font-size: 0.9rem;"></p>
+                </div>
+                <button class="cta-btn" onclick="logout()">Seal the Vault</button>
             </div>
         </div>
     </div>
@@ -763,21 +772,44 @@
         let currentUser = null;
 
         function login() {
-            const email = document.querySelector('#signin-form input[type="email"]').value;
+            const email = document.getElementById('login-email').value;
             if (!email) return alert("Please enter credentials.");
-            currentUser = { email, name: email.split('@')[0], tier: 'Gold' };
-            toggleModal('authModal');
-            alert(`Welcome back, ${currentUser.name}. Your karmic vault is ready.`);
-            document.querySelector('.nav-actions .icon-btn:first-child').innerHTML = "✨";
+            currentUser = { email, name: email.split('@')[0], tier: 'Gold', city: 'Mumbai' };
+            showProfile();
         }
 
         function register() {
-            const name = document.querySelector('#register-form input[placeholder="Full Name"]').value;
+            const name = document.getElementById('reg-name').value;
+            const city = document.getElementById('reg-city').value;
             if (!name) return alert("Please enter your details.");
-            currentUser = { name, email: 'new_user@mail.com', tier: 'Silver' };
-            toggleModal('authModal');
-            alert(`Welcome, ${name}. Your astrological journey begins now.`);
+            currentUser = { name, email: name.toLowerCase().replace(' ','') + '@mail.com', tier: 'Silver', city: city || 'Unknown' };
+            showProfile();
+        }
+
+        function showProfile() {
+            if (!currentUser) return;
+            document.getElementById('signin-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('tab-signin').style.display = 'none';
+            document.getElementById('tab-register').style.display = 'none';
+            
+            const profile = document.getElementById('user-profile');
+            profile.style.display = 'block';
+            document.getElementById('profile-name').innerText = currentUser.name;
+            document.getElementById('insight-text').innerText = `As a traveler from ${currentUser.city}, your current planetary transit favors Mercury. We recommend Emerald (Panna) for clear communication and wisdom.`;
+            
             document.querySelector('.nav-actions .icon-btn:first-child').innerHTML = "✨";
+            alert(`Welcome, ${currentUser.name}. Your cosmic vault is active.`);
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('user-profile').style.display = 'none';
+            document.getElementById('tab-signin').style.display = 'block';
+            document.getElementById('tab-register').style.display = 'block';
+            toggleAuthTab('signin');
+            document.querySelector('.nav-actions .icon-btn:first-child').innerHTML = "👤";
+            alert("Your session is sealed. Returning to the main world.");
         }
 
         function openStoneModal(id) {
