@@ -252,6 +252,7 @@
             <li><a href="javascript:void(0)" onclick="showView('collection')" id="nav-collection">Collection</a></li>
             <li><a href="javascript:void(0)" onclick="showView('ai')" id="nav-ai">AI Match</a></li>
             <li><a href="javascript:void(0)" onclick="showView('heritage')" id="nav-heritage">Carat Calc & History</a></li>
+            <li><a href="javascript:void(0)" onclick="showView('query')" id="nav-query">Enquiry</a></li>
             <li><a href="javascript:void(0)" onclick="showView('about')" id="nav-about">About</a></li>
         </ul>
         <div class="nav-actions">
@@ -302,15 +303,15 @@
     <script>
         // --- State Management ---
         const STONES = [
-            { id: 1, name: "Ruby", hindi: "Manik", planet: "Sun", metal: "Gold", finger: "Ring", price: 45000, ratti: "3.25", color: "#9B1C1C", desc: "Enhances leadership, vitality, and confidence. Governs the Sun's energy.", keywords: ["Wealth", "Confidence", "Success"] },
-            { id: 2, name: "Pearl", hindi: "Moti", planet: "Moon", metal: "Silver", finger: "Little", price: 8500, ratti: "5.00", color: "#F0EDE5", desc: "Brings emotional calm, nurtures relationships, and enhances intuition.", keywords: ["Healing", "Love"] },
-            { id: 3, name: "Red Coral", hindi: "Moonga", planet: "Mars", metal: "Gold/Copper", finger: "Ring", price: 12000, ratti: "6.00", color: "#B55A3A", desc: "Boosts courage, energy, and protection against negative forces.", keywords: ["Protection", "Confidence"] },
-            { id: 4, name: "Emerald", hindi: "Panna", planet: "Mercury", metal: "Gold", finger: "Little", price: 55000, ratti: "2.50", color: "#1B4D3E", desc: "Sharpens intellect, business acumen, and communication.", keywords: ["Education", "Wealth", "Success"] },
-            { id: 5, name: "Yellow Sapphire", hindi: "Pukhraj", planet: "Jupiter", metal: "Gold", finger: "Index", price: 38000, ratti: "4.00", color: "#C47A1E", desc: "Attracts wisdom, wealth, and spiritual growth.", keywords: ["Wealth", "Spiritual", "Education"] },
-            { id: 6, name: "Diamond", hindi: "Heera", planet: "Venus", metal: "Platinum", finger: "Middle", price: 180000, ratti: "1.00 ct", color: "#D8D8D8", desc: "Amplifies beauty, luxury, and harmonious relationships.", keywords: ["Love", "Wealth"] },
-            { id: 7, name: "Blue Sapphire", hindi: "Neelam", planet: "Saturn", metal: "Silver", finger: "Middle", price: 72000, ratti: "3.00", color: "#1B2A6B", desc: "Fastest-acting stone. Brings discipline, focus, and karmic justice.", keywords: ["Success", "Protection", "Confidence"] },
-            { id: 8, name: "Hessonite", hindi: "Gomed", planet: "Rahu", metal: "Silver", finger: "Middle", price: 9500, ratti: "5.25", color: "#8B4513", desc: "Neutralizes the malefic effects of Rahu; brings clarity and success.", keywords: ["Success", "Education"] },
-            { id: 9, name: "Cat's Eye", hindi: "Lehsunia", planet: "Ketu", metal: "Silver", finger: "Middle", price: 22000, ratti: "4.50", color: "#8B8000", desc: "Protects against accidents and Ketu's shadow; enhances intuition.", keywords: ["Spiritual", "Protection"] }
+            { id: 1, name: "Ruby", hindi: "Manik", planet: "Sun", metal: "Gold", finger: "Ring", baseRate: 13800, ratti: "3.25", color: "#9B1C1C", desc: "Enhances leadership, vitality, and confidence." },
+            { id: 2, name: "Pearl", hindi: "Moti", planet: "Moon", metal: "Silver", finger: "Little", baseRate: 1700, ratti: "5.00", color: "#F0EDE5", desc: "Brings emotional calm and intuition." },
+            { id: 3, name: "Red Coral", hindi: "Moonga", planet: "Mars", metal: "Gold/Copper", finger: "Ring", baseRate: 2000, ratti: "6.00", color: "#B55A3A", desc: "Boosts courage and protection." },
+            { id: 4, name: "Emerald", hindi: "Panna", planet: "Mercury", metal: "Gold", finger: "Little", baseRate: 22000, ratti: "2.50", color: "#1B4D3E", desc: "Sharpens intellect and communication." },
+            { id: 5, name: "Yellow Sapphire", hindi: "Pukhraj", planet: "Jupiter", metal: "Gold", finger: "Index", baseRate: 9500, ratti: "4.00", color: "#C47A1E", desc: "Attracts wisdom and wealth." },
+            { id: 6, name: "Diamond", hindi: "Heera", planet: "Venus", metal: "Platinum", finger: "Middle", baseRate: 180000, ratti: "1.00", color: "#D8D8D8", desc: "Amplifies beauty and luxury." },
+            { id: 7, name: "Blue Sapphire", hindi: "Neelam", planet: "Saturn", metal: "Silver", finger: "Middle", baseRate: 24000, ratti: "3.00", color: "#1B2A6B", desc: "Brings discipline and focus." },
+            { id: 8, name: "Hessonite", hindi: "Gomed", planet: "Rahu", metal: "Silver", finger: "Middle", baseRate: 1800, ratti: "5.25", color: "#8B4513", desc: "Neutralizes malefic effects." },
+            { id: 9, name: "Cat's Eye", hindi: "Lehsunia", planet: "Ketu", metal: "Silver", finger: "Middle", baseRate: 4800, ratti: "4.50", color: "#8B8000", desc: "Protects against shadow and Ketu." }
         ];
 
         let cart = [];
@@ -363,6 +364,7 @@
                 case 'authenticity': html = viewAuthenticity(); break;
                 case 'shipping': html = viewStatic('Shipping Policy', 'Global transit of sacred treasures.'); break;
                 case 'returns': html = viewStatic('Returns & Exchange', 'Karmic balance in every transaction.'); break;
+                case 'query': html = viewQuery(); break;
                 case 'ai': html = viewAI(); break;
                 case 'about': html = viewAbout(); break;
                 case 'heritage': html = viewHeritage(); break;
@@ -514,7 +516,11 @@
         }
 
         function viewWishlist() {
-            const items = wishlist.map(id => STONES.find(s => s.id === id)).filter(Boolean);
+            const items = wishlist.map(item => {
+                const s = STONES.find(x => x.id === item.id);
+                return { ...s, selectedWeight: item.weight, selectedShape: item.shape };
+            }).filter(Boolean);
+            
             return `
                 <div class="view active" style="padding:100px 10%;">
                     <div class="breadcrumb">Home → Your Wishlist</div>
@@ -547,14 +553,42 @@
         }
 
         function renderStoneCard(s, isWish = false) {
-            const inWish = wishlist.includes(s.id);
+            const inWish = wishlist.some(item => item.id === s.id);
+            const currentWeight = parseFloat(s.ratti);
+            const initialPrice = s.baseRate * currentWeight;
+            
             return `
-                <div class="stone-card">
+                <div class="stone-card" data-id="${s.id}">
                     <div class="gem-swatch" style="background:${s.color}; --swatch-color:${s.color}"></div>
                     <div class="brand-font" style="color:var(--gold-primary); font-size:0.6rem; margin-bottom:10px;">${s.planet} • ${s.metal}</div>
                     <h3>${s.name}</h3>
-                    <p style="font-size:0.9rem; color:var(--cream-dim); margin:20px 0; height:60px; overflow:hidden;">${s.desc}</p>
-                    <div class="brand-font" style="font-size:1.1rem; color:var(--gold-light); margin-bottom:25px;">₹${s.price.toLocaleString()}</div>
+                    <p style="font-size:0.85rem; color:var(--cream-dim); margin:15px 0; height:40px; overflow:hidden;">${s.desc}</p>
+                    
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px;">
+                        <div class="field" style="margin:0;">
+                            <label style="font-size:0.6rem;">Weight (Ratti)</label>
+                            <select class="card-weight" onchange="updateCardPrice(${s.id})" style="padding:8px; border-radius:5px;">
+                                <option value="3.25" ${currentWeight===3.25?'selected':''}>3.25</option>
+                                <option value="4.25" ${currentWeight===4.25?'selected':''}>4.25</option>
+                                <option value="5.25" ${currentWeight===5.25?'selected':''}>5.25</option>
+                                <option value="6.25" ${currentWeight===6.25?'selected':''}>6.25</option>
+                                <option value="7.25" ${currentWeight===7.25?'selected':''}>7.25</option>
+                            </select>
+                        </div>
+                        <div class="field" style="margin:0;">
+                            <label style="font-size:0.6rem;">Cut/Shape</label>
+                            <select class="card-shape" style="padding:8px; border-radius:5px;">
+                                <option>Oval</option>
+                                <option>Round</option>
+                                <option>Emerald</option>
+                                <option>Cushion</option>
+                                <option>Pear</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="brand-font card-price" style="font-size:1.1rem; color:var(--gold-light); margin-bottom:25px;">₹${initialPrice.toLocaleString()}</div>
+                    
                     <div style="display:grid; grid-template-columns:1fr 44px; gap:10px;">
                         <button class="btn-gold fill" onclick="addToCart(${s.id})">Add to Vault</button>
                         <button class="nav-icon" onclick="toggleWish(${s.id})" style="border:1px solid var(--border-gold); border-radius:8px; height:44px; color:${inWish?'var(--ruby)':'var(--gold-primary)'}">
@@ -563,6 +597,16 @@
                     </div>
                 </div>
             `;
+        }
+
+        function updateCardPrice(id) {
+            const card = document.querySelector(`.stone-card[data-id="${id}"]`);
+            if(!card) return;
+            const s = STONES.find(x => x.id === id);
+            const weight = parseFloat(card.querySelector('.card-weight').value);
+            const priceEl = card.querySelector('.card-price');
+            const total = s.baseRate * weight;
+            priceEl.innerText = `₹${total.toLocaleString()}`;
         }
         function viewStoneCare() {
             return `
@@ -642,7 +686,7 @@
         }
 
         function viewCheckout() {
-            const subtotal = cart.reduce((acc, i) => acc + STONES.find(x=>x.id===i.id).price, 0);
+            const subtotal = cart.reduce((acc, i) => acc + i.price, 0);
             return `
                 <div class="view active" style="padding:100px 10%;">
                     <div class="breadcrumb">Vault → Checkout</div>
@@ -658,7 +702,7 @@
                         </div>
                         <div style="background:var(--bg-secondary); padding:40px; border:1px solid var(--border-gold); height:fit-content;">
                             <h4 class="brand-font" style="margin-bottom:30px;">Vault Summary</h4>
-                            ${cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.9rem; color:var(--cream-dim);"><span>${STONES.find(x=>x.id===i.id).name}</span><span>₹${STONES.find(x=>x.id===i.id).price.toLocaleString()}</span></div>`).join('')}
+                            ${cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.9rem; color:var(--cream-dim);"><span>${STONES.find(x=>x.id===i.id).name} (${i.weight} Ratti)</span><span>₹${i.price.toLocaleString()}</span></div>`).join('')}
                             <div style="border-top:1px solid var(--border-gold); margin-top:30px; padding-top:20px; display:flex; justify-content:space-between; font-weight:700; color:var(--gold-primary);">
                                 <span>Total Payable</span><span>₹${subtotal.toLocaleString()}</span>
                             </div>
@@ -756,9 +800,40 @@
             `;
         }
 
-        function showAuthError() {
-            setTimeout(() => openModal('login'), 100);
-            return `<div class="view active" style="padding:200px 10%; text-align:center;"><h3>Access restricted. Please sign in to the vault.</h3></div>`;
+        function viewQuery() {
+            return `
+                <div class="view active" style="padding:150px 10%;">
+                    <div class="section-header">
+                        <h4 class="brand-font" style="color:var(--gold-primary); margin-bottom:10px;">BESPOKE INQUIRY</h4>
+                        <h2>Direct Portal to our Masters</h2>
+                        <p style="color:var(--cream-dim);">Request a video consultation or a personalized gemstone recommendation from our Vedic experts.</p>
+                    </div>
+                    
+                    <div style="max-width:800px; margin:0 auto; background:var(--bg-secondary); padding:60px; border:1px solid var(--border-gold);">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
+                            <div class="field"><label>Full Name</label><input type="text" placeholder="Your Name"></div>
+                            <div class="field"><label>Email Address</label><input type="email" placeholder="email@example.com"></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
+                            <div class="field"><label>Phone/WhatsApp</label><input type="text" placeholder="+91 XXXX XXXX"></div>
+                            <div class="field">
+                                <label>Consultation Type</label>
+                                <select style="width:100%; padding:15px; background:var(--bg-primary); border:1px solid var(--border-gold); color:white;">
+                                    <option>Video Call on WhatsApp</option>
+                                    <option>Email Quotation</option>
+                                    <option>In-Person (Jaipur)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field" style="margin-bottom:40px;">
+                            <label>The Call of your Soul (Message)</label>
+                            <textarea style="width:100%; height:150px; background:var(--bg-primary); border:1px solid var(--border-gold); padding:20px; color:white;" placeholder="Describe the aspiration or challenge you seek guidance for..."></textarea>
+                        </div>
+                        <button class="btn-gold fill" style="width:100%;" onclick="showToast('Inquiry Sent. We will contact you shortly.')">Send Sacred Enquiry</button>
+                    </div>
+                </div>
+                ${renderFooter()}
+            `;
         }
 
         // --- Logic Extensions ---
@@ -774,9 +849,16 @@
             showToast("Destiny Sealed \u2726");
         }
         function toggleWish(id) {
-            const idx = wishlist.indexOf(id);
+            const card = document.querySelector(`.stone-card[data-id="${id}"]`);
+            const weight = card ? parseFloat(card.querySelector('.card-weight').value) : STONES.find(x=>x.id===id).ratti;
+            const shape = card ? card.querySelector('.card-shape').value : 'Oval';
+            
+            const idx = wishlist.findIndex(item => item.id === id && item.weight === weight && item.shape === shape);
             if(idx > -1) wishlist.splice(idx, 1);
-            else { wishlist.push(id); showToast("Saved to Wishlist \u2661"); }
+            else { 
+                wishlist.push({id, weight, shape}); 
+                showToast(`Saved ${shape} ${weight} Ratti to Wishlist \u2661`); 
+            }
             document.getElementById('wishlist-badge').innerText = wishlist.length;
             renderView();
         }
@@ -929,7 +1011,7 @@
                         <div style="width:40px; height:40px; border-radius:50%; background:${s.color};"></div>
                         <div style="flex-grow:1;">
                             <div style="font-weight:600;">${s.name}</div>
-                            <div style="font-size:0.7rem; color:var(--gold-primary);">${s.ratti} Ratti • ₹${s.price.toLocaleString()}</div>
+                            <div style="font-size:0.7rem; color:var(--gold-primary);">${item.weight} Ratti • ${item.shape} • ₹${item.price.toLocaleString()}</div>
                         </div>
                         <button onclick="removeFromCart(${s.id})" style="background:none; border:none; color:#555; cursor:pointer;">&times;</button>
                     </div>
@@ -946,8 +1028,14 @@
         }
 
         function addToCart(id) {
-            cart.push({id});
-            showToast("Added to Vault \u2726");
+            const card = document.querySelector(`.stone-card[data-id="${id}"]`);
+            const weight = card ? parseFloat(card.querySelector('.card-weight').value) : STONES.find(x=>x.id===id).ratti;
+            const shape = card ? card.querySelector('.card-shape').value : 'Oval';
+            const s = STONES.find(x=>x.id===id);
+            const price = s.baseRate * weight;
+
+            cart.push({id, weight, shape, price});
+            showToast(`Added ${shape} ${weight} Ratti to Vault \u2726`);
             renderCart();
             toggleCart();
         }
