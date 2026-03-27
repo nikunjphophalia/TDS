@@ -996,15 +996,22 @@
             renderCart();
         }
 
+        function removeFromCart(index) {
+            const item = cart[index];
+            cart.splice(index, 1);
+            showToast(`Removed ${item.shape} ${item.weight} Ratti from Vault`);
+            renderCart();
+        }
+
         function renderCart() {
-            const container = document.getElementById('cart-items');
+            const list = document.getElementById('cart-items');
             const footer = document.getElementById('cart-footer');
             if(cart.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:100px 0; opacity:0.5;">Empty Vault</div>`;
+                list.innerHTML = `<div style="text-align:center; padding:100px 0; opacity:0.5;">Empty Vault</div>`;
                 footer.innerHTML = '';
                 return;
             }
-            container.innerHTML = cart.map(item => {
+            list.innerHTML = cart.map((item, index) => {
                 const s = STONES.find(x=>x.id===item.id);
                 return `
                     <div style="display:flex; gap:15px; margin-bottom:20px;">
@@ -1013,11 +1020,11 @@
                             <div style="font-weight:600;">${s.name}</div>
                             <div style="font-size:0.7rem; color:var(--gold-primary);">${item.weight} Ratti • ${item.shape} • ₹${item.price.toLocaleString()}</div>
                         </div>
-                        <button onclick="removeFromCart(${s.id})" style="background:none; border:none; color:#555; cursor:pointer;">&times;</button>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#555; cursor:pointer; font-size:1.4rem;">&times;</button>
                     </div>
                 `;
             }).join('');
-            const subtotal = cart.reduce((acc, i) => acc + STONES.find(x=>x.id===i.id).price, 0);
+            const subtotal = cart.reduce((acc, i) => acc + i.price, 0);
             footer.innerHTML = `
                 <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:700; color:var(--gold-primary);">
                     <span>Vault Total</span><span>₹${subtotal.toLocaleString()}</span>
