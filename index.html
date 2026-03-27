@@ -772,7 +772,7 @@
         });
 
         async function revealGemstone() {
-            const input = document.getElementById('ai-input').value;
+            const input = document.getElementById('ai-prompt')?.value || document.getElementById('ai-input')?.value;
             const chips = Array.from(document.querySelectorAll('.chip.active')).map(c => c.dataset.val);
             if(!input && chips.length === 0) return alert("Please select an aspiration or describe your situation.");
 
@@ -780,6 +780,18 @@
             const resultBox = document.getElementById('ai-result');
             loader.style.display = 'block';
             resultBox.style.display = 'none';
+
+            // Traditional Vedic Mapping for Fallback
+            const fallbacks = {
+                'Wealth': { name: 'Yellow Sapphire (Pukhraj)', desc: 'Jupiter brings abundance and spiritual wealth.' },
+                'Love': { name: 'Diamond (Heera)', desc: 'Venus governs harmony, luxury, and devotion.' },
+                'Protection': { name: 'Red Coral (Moonga)', desc: 'Mars provides a protective shield and courage.' },
+                'Healing': { name: 'Pearl (Moti)', desc: 'The Moon governs emotional and physical rejuvenation.' },
+                'Confidence': { name: 'Ruby (Manik)', desc: 'The Sun bestows authority, vitality, and inner fire.' },
+                'Spiritual': { name: 'Hessonite (Gomed)', desc: 'Rahu clarity aids in cutting through illusions.' },
+                'Education': { name: 'Emerald (Panna)', desc: 'Mercury sharpens the intellect and communication.' },
+                'Success': { name: 'Blue Sapphire (Neelam)', desc: 'Saturn brings discipline and karmic rewards.' }
+            };
 
             try {
                 const prompt = `Aspiration: ${chips.join(', ')}. Situation: ${input}`;
@@ -794,20 +806,25 @@
                     body: JSON.stringify({
                         model: "claude-3-5-sonnet-20240620",
                         max_tokens: 1000,
-                        system: "You are a Vedic astrologer and gemologist specializing in Navratan gemstones. Based on the user's aspiration or life situation, recommend 1–2 specific gemstones from the Navratna system (Ruby, Pearl, Red Coral, Emerald, Yellow Sapphire, Diamond, Blue Sapphire, Hessonite, Cat's Eye). Explain the planetary association, wearing instructions (metal, finger, day), and how it addresses their need. Keep response under 200 words. Be mystical yet grounded.",
+                        system: "You are a Vedic astrologer and gemologist specializing in Navratan gemstones. Recommend 1–2 stones based on the input. Max 150 words.",
                         messages: [{ role: "user", content: prompt }]
                     })
                 });
 
+                if (!response.ok) throw new Error("API Key Missing or Network Error");
                 const data = await response.json();
                 loader.style.display = 'none';
                 resultBox.style.display = 'block';
                 typeWriterEffect(data.content[0].text, resultBox);
 
             } catch (err) {
+                // FALLBACK LOGIC
                 loader.style.display = 'none';
                 resultBox.style.display = 'block';
-                resultBox.innerText = "The stars are momentarily clouded. Please try again or visit us in the vault.";
+                const firstAspiration = chips[0] || 'Success';
+                const match = fallbacks[firstAspiration] || fallbacks['Success'];
+                const fallbackText = `The celestial tides suggest a focus on ${match.name}. ${match.desc} To fully align with your destiny, wear this stone set in gold on your most auspicious day. (Note: Please replace the Anthropic API Key in the code for personalized AI reasoning).`;
+                typeWriterEffect(fallbackText, resultBox);
             }
         }
 
