@@ -321,6 +321,147 @@
         let checkoutStep = 1;
         let checkoutData = {};
 
+        // --- Core Routing (MUST BE DECLARED BEFORE USE) ---
+
+        function showView(view) {
+            const main = document.getElementById('main-content');
+            if(!main) return;
+            
+            // Start transition
+            main.style.opacity = '0';
+            
+            setTimeout(() => {
+                currentView = view;
+                renderView();
+                
+                // End transition
+                main.style.opacity = '1';
+                window.scrollTo(0, 0);
+                updateNav();
+                
+                // Update History
+                history.pushState({view}, '', `#${view}`);
+            }, 300);
+        }
+
+        function renderView() {
+            const main = document.getElementById('main-content');
+            if(!main) return;
+            
+            let html = '';
+            switch(currentView) {
+                case 'home': html = viewHome() || ''; break;
+                case 'collection': html = viewCollection(); break;
+                case 'wishlist': html = viewWishlist(); break;
+                case 'checkout': html = viewCheckout(); break;
+                case 'order-confirmation': html = viewOrderConfirmation(); break;
+                case 'account': html = viewAccount(); break;
+                case 'loose-stones': html = viewStatic('Loose Stones', 'Certified high-carat gemstones available for acquisition.'); break;
+                case 'custom-setting': html = viewStatic('Custom Setting', 'Bespoke handcrafting of your cosmic alignments.'); break;
+                case 'gift-cards': html = viewGiftCards(); break;
+                case 'stone-care': html = viewStoneCare(); break;
+                case 'authenticity': html = viewAuthenticity(); break;
+                case 'shipping': html = viewStatic('Shipping Policy', 'Global transit of sacred treasures.'); break;
+                case 'returns': html = viewStatic('Returns & Exchange', 'Karmic balance in every transaction.'); break;
+                default: html = viewHome() || '';
+            }
+            
+            main.innerHTML = html;
+            
+            // Re-init view specific components
+            if(currentView === 'home') initHomeFeatures();
+            if(currentView === 'collection') applyFilters('All');
+        }
+
+        function viewHome() {
+            return `
+                <div class="view active">
+                    <div class="hero">
+                        <canvas id="hero-canvas"></canvas>
+                        <div style="position:relative; z-index:10;">
+                            <div class="brand-font" style="font-size:0.8rem; letter-spacing:0.5em; color:var(--gold-primary); margin-bottom:20px;">EST. 1987 • JAIPUR</div>
+                            <h1>Destiny in Every Gem</h1>
+                            <p style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.5rem; color:var(--cream-dim); margin-bottom:40px;">Unlock the cosmic powers of Vedic Navratan stones.</p>
+                            <div style="display:flex; gap:20px; justify-content:center;">
+                                <button class="btn-gold fill" onclick="showView('collection')">Explore Collection</button>
+                                <button class="btn-gold" onclick="scrollToId('ai')">Find My Match</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <section id="ai" style="padding:100px 10%; background:var(--bg-secondary);">
+                        <div class="section-header">
+                            <div class="brand-font" style="color:var(--gold-primary); font-size:0.7rem; letter-spacing:0.2em; margin-bottom:10px;">ASTROLOGICAL GUIDANCE</div>
+                            <h2>Consult the Stars</h2>
+                            <p style="color:var(--cream-dim);">The AI Oracle matches your aura to the perfect stone.</p>
+                        </div>
+                        
+                        <div class="ai-container" style="max-width:800px; margin:0 auto; background:var(--bg-tertiary); padding:60px; border:1px solid var(--border-gold); border-radius:20px;">
+                            <div class="chips" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px; justify-content:center;">
+                                ${['Wealth', 'Love', 'Protection', 'Healing', 'Success', 'Peace'].map(a => `<span class="chip" onclick="toggleChip(this)">${a}</span>`).join('')}
+                            </div>
+                            <textarea id="ai-prompt" style="width:100%; height:120px; background:rgba(0,0,0,0.3); border:1px solid var(--border-gold); color:var(--cream); padding:20px; border-radius:10px; margin-bottom:20px;" placeholder="Tell the Oracle your aspiration..."></textarea>
+                            <button class="btn-gold fill" style="width:100%;" onclick="revealGemstone()">Reveal My Stone</button>
+                            <div id="ai-loading" style="display:none; text-align:center; margin-top:30px;"><div class="spinner" style="width:30px; height:30px; border:2px solid var(--gold-dark); border-top-color:white; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto;"></div></div>
+                            <div id="ai-result" style="display:none; margin-top:40px; padding:30px; border-left:3px solid var(--gold-primary); background:rgba(201,168,76,0.05);"></div>
+                        </div>
+                    </section>
+                </div>
+                ${renderFooter()}
+            `;
+        }
+
+        function viewWishlist() {
+            const items = wishlist.map(id => STONES.find(s => s.id === id)).filter(Boolean);
+            return `
+                <div class="view active" style="padding:100px 10%;">
+                    <div class="breadcrumb">Home → Your Wishlist</div>
+                    <div class="section-header" style="text-align:left;"><h2>Saved Treasures</h2><p>Sacred alignments awaiting your call.</p></div>
+                    ${items.length === 0 ? '<div style="text-align:center; padding:100px 0; opacity:0.5;">Your vault is empty of desires.</div>' : `
+                        <div class="stone-grid">
+                            ${items.map(s => renderStoneCard(s, true)).join('')}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function viewCollection() {
+            return `
+                <div class="view active" style="padding:100px 10%;">
+                    <div class="breadcrumb">Home → Collection</div>
+                    <div class="section-header" style="text-align:left;">
+                        <h2>The Collection</h2>
+                        <p>Navratna — The nine planetary stones of fortune.</p>
+                    </div>
+                    <div class="filter-bar" style="display:flex; gap:15px; margin-bottom:50px; overflow-x:auto; padding-bottom:10px;">
+                        <button class="chip active" onclick="applyFilters('All', this)">All Stones</button>
+                        ${STONES.map(s => `<button class="chip" onclick="applyFilters('${s.name}', this)">${s.name}</button>`).join('')}
+                    </div>
+                    <div class="stone-grid" id="coll-grid"></div>
+                </div>
+                ${renderFooter()}
+            `;
+        }
+
+        function renderStoneCard(s, isWish = false) {
+            const inWish = wishlist.includes(s.id);
+            return `
+                <div class="stone-card">
+                    <div class="gem-swatch" style="background:${s.color}; --swatch-color:${s.color}"></div>
+                    <div class="brand-font" style="color:var(--gold-primary); font-size:0.6rem; margin-bottom:10px;">${s.planet} • ${s.metal}</div>
+                    <h3>${s.name}</h3>
+                    <p style="font-size:0.9rem; color:var(--cream-dim); margin:20px 0; height:60px; overflow:hidden;">${s.desc}</p>
+                    <div class="brand-font" style="font-size:1.1rem; color:var(--gold-light); margin-bottom:25px;">₹${s.price.toLocaleString()}</div>
+                    <div style="display:grid; grid-template-columns:1fr 44px; gap:10px;">
+                        <button class="btn-gold fill" onclick="addToCart(${s.id})">Add to Vault</button>
+                        <button class="nav-icon" onclick="toggleWish(${s.id})" style="border:1px solid var(--border-gold); border-radius:8px; height:44px; color:${inWish?'var(--ruby)':'var(--gold-primary)'}">
+                            <svg width="18" height="18" fill="${inWish?'var(--ruby)':'none'}" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
         function viewStoneCare() {
             return `
                 <div class="view active" style="padding:100px 10%;">
@@ -740,14 +881,9 @@
             }
         }
 
-        window.onload = () => {
-            if(sessionStorage.getItem('nikunj_visited')) exitGate('home');
-            else initSplash();
-            renderView();
-        };
-
         function initSplash() {
             const c = document.getElementById('splash-canvas');
+            if(!c) return;
             const x = c.getContext('2d');
             c.width = window.innerWidth; c.height = window.innerHeight;
             let parts = Array.from({length:60}, () => ({ x:Math.random()*c.width, y:Math.random()*c.height, s:Math.random()+0.5 }));
@@ -762,6 +898,30 @@
             }
             loop();
         }
+
+        // --- Lifecycle ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if(sessionStorage.getItem('nikunj_visited')) {
+                const gate = document.getElementById('splash-gate');
+                if(gate) gate.style.display = 'none';
+                renderView();
+            } else {
+                initSplash();
+                renderView();
+            }
+            
+            // Initial sync
+            updateNav();
+
+            // History / Popstate Support
+            window.onpopstate = (e) => {
+                if(e.state && e.state.view) {
+                    currentView = e.state.view;
+                    renderView();
+                }
+            };
+        });
     </script>
 </body>
 </html>
