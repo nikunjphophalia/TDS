@@ -251,8 +251,8 @@
         <ul class="nav-links">
             <li><a href="javascript:void(0)" onclick="showView('collection')" id="nav-collection">Collection</a></li>
             <li><a href="javascript:void(0)" onclick="scrollToId('ai')" id="nav-ai">AI Match</a></li>
-            <li><a href="javascript:void(0)" onclick="scrollToId('heritage')" id="nav-heritage">Carat Calc & History</a></li>
-            <li><a href="javascript:void(0)" onclick="scrollToId('about')" id="nav-about">About</a></li>
+            <li><a href="javascript:void(0)" onclick="showView('heritage')" id="nav-heritage">Carat Calc & History</a></li>
+            <li><a href="javascript:void(0)" onclick="showView('about')" id="nav-about">About</a></li>
         </ul>
         <div class="nav-actions">
             <button class="nav-icon" onclick="showView('wishlist')" aria-label="Wishlist">
@@ -363,6 +363,8 @@
                 case 'authenticity': html = viewAuthenticity(); break;
                 case 'shipping': html = viewStatic('Shipping Policy', 'Global transit of sacred treasures.'); break;
                 case 'returns': html = viewStatic('Returns & Exchange', 'Karmic balance in every transaction.'); break;
+                case 'about': html = viewAbout(); break;
+                case 'heritage': html = viewHeritage(); break;
                 default: html = viewHome() || '';
             }
             
@@ -389,6 +391,31 @@
                         </div>
                     </div>
                     
+                    <section id="ai" style="padding:100px 10%; background:var(--bg-secondary);">
+                        <div class="section-header">
+                            <div class="brand-font" style="color:var(--gold-primary); font-size:0.7rem; letter-spacing:0.2em; margin-bottom:10px;">ASTROLOGICAL GUIDANCE</div>
+                            <h2>Consult the Stars</h2>
+                            <p style="color:var(--cream-dim);">The AI Oracle matches your aura to the perfect stone.</p>
+                        </div>
+                        
+                        <div class="ai-container" style="max-width:800px; margin:0 auto; background:var(--bg-tertiary); padding:60px; border:1px solid var(--border-gold); border-radius:20px;">
+                            <div class="chips" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px; justify-content:center;">
+                                ${['Wealth', 'Love', 'Protection', 'Healing', 'Success', 'Peace'].map(a => `<span class="chip" onclick="toggleChip(this)">${a}</span>`).join('')}
+                            </div>
+                            <textarea id="ai-prompt" style="width:100%; height:120px; background:rgba(0,0,0,0.3); border:1px solid var(--border-gold); color:var(--cream); padding:20px; border-radius:10px; margin-bottom:20px;" placeholder="Tell the Oracle your aspiration..."></textarea>
+                            <button class="btn-gold fill" style="width:100%;" onclick="revealGemstone()">Reveal My Stone</button>
+                            <div id="ai-loading" style="display:none; text-align:center; margin-top:30px;"><div class="spinner" style="width:30px; height:30px; border:2px solid var(--gold-dark); border-top-color:white; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto;"></div></div>
+                            <div id="ai-result" style="display:none; margin-top:40px; padding:30px; border-left:3px solid var(--gold-primary); background:rgba(201,168,76,0.05);"></div>
+                        </div>
+                    </section>
+                </div>
+                ${renderFooter()}
+            `;
+        }
+
+        function viewAbout() {
+            return `
+                <div class="view active">
                     <section id="about" style="padding:150px 10%; position:relative; overflow:hidden;">
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
                             <div style="position:relative;">
@@ -419,8 +446,15 @@
                             </div>
                         </div>
                     </section>
+                </div>
+                ${renderFooter()}
+            `;
+        }
 
-                    <section id="heritage" style="padding:150px 10%; background:var(--bg-tertiary); border-top:1px solid var(--border-gold);">
+        function viewHeritage() {
+            return `
+                <div class="view active">
+                    <section id="heritage" style="padding:150px 10%; background:var(--bg-tertiary);">
                         <div class="section-header">
                             <h4 class="brand-font" style="color:var(--gold-primary); margin-bottom:10px; letter-spacing:3px;">THE SACRED CALCULATOR</h4>
                             <h2>Precision of Prana</h2>
