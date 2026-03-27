@@ -3,2122 +3,916 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N & J's Jewellery | Vedic Navratan Gems</title>
+    <title>Nikunj Jewellery | Vedic Navratan Gems</title>
+    <!-- SEO -->
+    <meta name="description" content="Unlock the cosmic powers of Vedic Navratan stones. Handpicked, energized, and ethically sourced luxury gemstones.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --gold: #C9A84C;
-            --gold-light: #E8D48B;
-            --gold-border: rgba(201, 168, 76, 0.22);
-            --navy: #0D0906;
-            --navy-light: #1A1209;
-            --navy-deep: #050403;
-            --white: #FBF7EE;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-primary: #0A0705;
+            --bg-secondary: #130E09;
+            --bg-tertiary: #1C1610;
+            --gold-primary: #C9A84C;
+            --gold-light: #E8CB7A;
+            --gold-dark: #8A6D2F;
+            --cream: #F5EDD6;
+            --cream-dim: #B8A98A;
+            --ruby: #9B1C1C;
+            --emerald: #1B4D3E;
+            --sapphire: #1B2A6B;
+            --pearl: #F0EDE5;
+            --coral: #B55A3A;
+            --topaz: #C47A1E;
+            --hessonite: #8B4513;
+            --cats-eye: #8B8000;
+            --border-gold: rgba(201,168,76,0.25);
+            --glow-gold: rgba(201,168,76,0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Jost', sans-serif;
-            border-radius: 0 !important;
+            outline: none;
         }
 
         body {
-            background-color: var(--navy);
-            color: var(--white);
-            overflow-x: hidden;
+            background-color: var(--bg-primary);
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3BaseFilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/feTurbulence%3E%3C/baseFilter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        /* --- Animations --- */
-        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes ringPulse { 0% { transform: scale(0.8); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
+        .brand-font { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; }
 
-        /* --- Scrollbar --- */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--navy); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
-
-        /* --- Navigation --- */
+        /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 0; width: 100%; height: 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%;
+            background: rgba(10, 7, 5, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(10,14,20,0.9), transparent);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            transition: var(--transition);
         }
+
+        nav.scrolled { border-bottom: 1px solid var(--border-gold); }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: var(--white);
+            display: flex; align-items: center; gap: 15px;
+            text-decoration: none; color: var(--gold-primary);
         }
 
-        .logo img {
-            height: 40px;
-            filter: drop-shadow(0 0 5px var(--gold));
+        .logo-circle {
+            width: 40px; height: 40px;
+            border: 1px solid var(--gold-primary);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
+        .nav-links { display: flex; gap: 40px; list-style: none; }
         .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            text-decoration: none; color: var(--cream-dim);
+            font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.15em;
+            position: relative; transition: var(--transition);
+        }
+        .nav-links a::after {
+            content: ""; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 1px; background: var(--gold-primary);
             transition: var(--transition);
         }
+        .nav-links a:hover { color: var(--gold-primary); }
+        .nav-links a:hover::after { width: 100%; }
 
-        .nav-links a:hover {
-            color: var(--gold);
+        .nav-actions { display: flex; gap: 20px; align-items: center; }
+        .nav-btn {
+            background: none; border: none; color: var(--gold-primary);
+            cursor: pointer; position: relative; width: 24px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cart-badge {
+            position: absolute; top: -8px; right: -8px;
+            background: var(--ruby); color: white;
+            font-size: 0.6rem; width: 16px; height: 16px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif;
         }
 
-        .nav-actions {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
-            color: var(--white);
-            cursor: pointer;
-            font-size: 1.2rem;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .icon-btn:hover { color: var(--gold); }
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background: var(--gold);
-            color: var(--navy);
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 50%;
-            font-weight: 700;
-        }
-
-        /* --- Hero --- */
+        /* Hero */
+        #hero-canvas { position: absolute; top:0; left:0; pointer-events:none; }
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(circle at center, #1a2332 0%, #0a0e14 100%);
+            height: 100vh; width: 100%;
+            display:flex; flex-direction:column; justify-content:center; align-items:center;
+            text-align:center; position:relative;
+            background: radial-gradient(circle at center, rgba(201,168,76,0.05) 0%, var(--bg-primary) 70%);
+            padding: 0 10%;
         }
 
-        .hero-bg-img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.3;
-            z-index: 1;
-        }
-
-        .animated-rings {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: 2;
-        }
-
-        .ring-1 { animation: ringPulse 4s infinite linear; }
-        .ring-2 { animation: ringPulse 4s infinite linear 2s; }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 800px;
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--gold), #fff, var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeIn 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: rgba(251, 247, 238, 0.65);
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            margin-bottom: 2.5rem;
-            animation: fadeIn 1s ease 0.3s backwards;
-        }
+        .hero h1 { font-size: 4.5rem; font-style: italic; color: var(--cream); margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.25rem; color: var(--cream-dim); max-width: 600px; margin-bottom: 40px; }
 
         .cta-btn {
-            background: var(--gold);
-            color: var(--navy-deep);
-            padding: 1rem 2.5rem;
-            border: none;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.72rem;
-            cursor: pointer;
-            transition: var(--transition);
-            animation: fadeIn 1s ease 0.6s backwards;
-        }
-
-        .cta-btn:hover {
-            background: var(--gold-bright);
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-        }
-
-        /* --- Marquee --- */
-        .marquee {
-            background: var(--navy-light);
-            padding: 2rem 0;
-            overflow: hidden;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .marquee-track {
-            display: flex;
-            width: 200%;
-            animation: scroll 30s linear infinite;
-        }
-
-        .marquee-item {
-            flex: 0 0 10%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .marquee-item svg {
-            width: 40px;
-            height: 40px;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .marquee-item span {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
-        }
-
-        /* --- Sections --- */
-        section {
-            padding: 6rem 5%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        /* --- AI Section --- */
-        .ai-prompt-section {
-            background: linear-gradient(45deg, #0d121b, #1a2332);
-            border-radius: 20px;
-            padding: 4rem;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-        }
-
-        .prompt-input-container {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .prompt-input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--gold);
-            padding: 1.5rem 2rem;
-            color: white;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            outline: none;
-        }
-
-        .prompt-btn {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--gold);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .pills {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 2rem;
-        }
-
-        .pill {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .pill:hover { background: var(--gold); color: var(--navy); }
-
-        /* --- Collection Grid --- */
-        .collection-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .stone-card {
-            background: var(--navy-light);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stone-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .stone-card svg {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 1.5rem;
-            animation: float 4s infinite ease-in-out;
-        }
-
-        .stone-card h3 { margin-bottom: 0.5rem; color: var(--gold); }
-        .stone-card .sanskrit { font-size: 0.9rem; color: #888; font-style: italic; }
-        .stone-card .price { font-weight: 700; color: #fff; margin-top: 1rem; display: block; }
-
-        /* --- Modal System --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: var(--navy-light);
-            border: 1px solid var(--gold);
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 10px;
-            padding: 3rem;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--gold);
-        }
-
-        /* --- Footer --- */
-        footer {
-            background: #05070a;
-            padding: 5rem 5% 2rem;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-col h4 { color: var(--gold); margin-bottom: 1.5rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 0.8rem; }
-        .footer-col ul li a { color: #888; text-decoration: none; transition: var(--transition); }
-        .footer-col ul li a:hover { color: var(--gold); padding-left: 5px; }
-
-        /* --- Toasts --- */
-        #toast-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 0.5rem;
-            z-index: 8000;
-        }
-
-        .toast {
-            background: var(--navy-light);
-            border-left: 3px solid var(--gold);
-            color: var(--white);
-            padding: 0.85rem 1.3rem;
-            min-width: 240px;
-            max-width: 300px;
-            font-size: 0.8rem;
-            animation: slideIn 0.4s ease forwards;
-            border-bottom: 1px solid var(--gold-border);
-        }
-
-        @keyframes slideIn { from { transform: translateX(110%); } to { transform: translateX(0); } }
-
-        /* --- Chatbot --- */
-        #chat-float {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--gold), #8B6914);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .pulse-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid var(--gold);
-            animation: ringPulse 2s infinite;
-        }
-
-        #chat-panel {
-            position: fixed;
-            bottom: 6rem;
-            right: 2rem;
-            width: 350px;
-            height: 520px;
-            background: var(--navy-light);
-            border: 1px solid var(--gold);
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        #chat-panel.active { transform: translateY(0); opacity: 1; display: flex; }
-
-        .chat-header {
-            background: var(--navy-deep);
-            padding: 1rem;
-            border-bottom: 1px solid var(--gold-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .msg { padding: 0.6rem 0.9rem; font-size: 0.85rem; max-width: 85%; }
-        .msg.user { align-self: flex-end; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
-        .msg.ai { align-self: flex-start; background: rgba(255,255,255,0.04); border-left: 3px solid var(--gold); }
-
-        .chip {
-            padding: 0.35rem 0.8rem;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 0.72rem;
-            cursor: pointer;
-            display: inline-block;
-            margin: 0.2rem;
-        }
-
-        /* --- Radio Cards --- */
-        .radio-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-        .radio-card {
-            padding: 1rem;
-            border: 1px solid var(--gold-border);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .radio-card.selected { border-color: var(--gold); background: rgba(201,168,76,0.05); }
-
-        /* --- Input Styles --- */
-        input, select, textarea {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--gold-border);
-            color: var(--white);
-            padding: 0.8rem 1rem;
-            outline: none;
-            width: 100%;
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(201,168,76,0.1); }
-
-        .badge-bounce { animation: badgeBounce 0.3s ease; }
-        @keyframes badgeBounce { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 2rem;
-            left: 1.5rem;
-            width: 52px;
-            height: 52px;
-            background: #25D366;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .admin-nav-item { padding: 1rem 2rem; cursor: pointer; color: #888; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 2px solid transparent; transition: var(--transition); }
-        .admin-nav-item:hover { color: var(--gold); }
-        .admin-nav-item.active { color: var(--gold); border-bottom-color: var(--gold); }
-        .admin-modal { max-width: 1200px !important; width: 95% !important; background: #0D0906 !important; }
-        
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-8px); } }
-        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            nav { padding: 1rem 5%; }
-            .nav-links { display: none; }
-            .radio-grid { grid-template-columns: 1fr 1fr; }
-            .admin-nav { overflow-x: auto; white-space: nowrap; }
-        }
-        /* New Grid & Calculator Specific Styles */
-        #stonesGrid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        @media (max-width: 992px) { #stonesGrid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 480px) { #stonesGrid { grid-template-columns: 1fr !important; } }
-
-        .stone-card {
-            background: var(--navy-light);
-            border: 1px solid var(--gold-border);
-            padding: 0; 
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-            cursor: pointer;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stone-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.2);
-            border-color: var(--gold);
-        }
-
-        .gem-display {
-            padding: 3rem 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .gem-display svg {
-            filter: drop-shadow(0 0 15px var(--glow));
-            transition: transform 0.5s ease;
-        }
-
-        .stone-card:hover .gem-display svg {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .stone-info {
-            padding: 1.5rem;
-            text-align: left;
-            border-top: 1px solid var(--gold-border);
-            flex-grow: 1;
-        }
-
-        .wishlist-heart {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: var(--transition);
-        }
-
-        .wishlist-heart:hover { transform: scale(1.2); }
-
-        .add-to-cart-btn {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: var(--gold);
-            color: var(--navy-deep);
-            border: none;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .add-to-cart-btn:hover { background: #fff; transform: scale(1.1); }
-
-        /* Calculator Styles */
-        .calc-panel {
-            background: var(--navy-light);
-            border: 1px solid var(--gold-border);
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .calc-toggle-group {
-            display: flex;
-            gap: 0;
-            border: 1px solid var(--gold-border);
-        }
-
-        .calc-toggle {
-            flex: 1;
+            padding: 15px 40px;
+            border: 1px solid var(--gold-primary);
             background: transparent;
-            border: none;
-            color: #888;
-            padding: 0.8rem;
-            cursor: pointer;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--gold-primary);
+            font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.2em;
+            border-radius: 50px; cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .cta-btn:hover { background: var(--gold-primary); color: var(--bg-primary); transform: scale(1.02); }
+
+        .hero-stats {
+            display: flex; gap: 40px; margin-top: 60px;
+            border-top: 1px solid var(--border-gold); padding-top: 40px;
+        }
+        .stat-item {
+            font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--gold-dark);
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Commons */
+        section { padding: 120px 10%; position: relative; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 10px; }
+        .section-header p { font-size: 1.1rem; color: var(--cream-dim); font-style: italic; }
+
+        /* AI Section */
+        .ai-container {
+            max-width: 900px; margin: 0 auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-gold);
+            padding: 50px; border-radius: 16px;
+        }
+
+        .chip-group {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+            margin-bottom: 30px;
+        }
+        .chip {
+            padding: 8px 18px; border: 1px solid var(--border-gold);
+            border-radius: 50px; cursor: pointer; font-family: 'Cinzel', serif;
+            font-size: 0.65rem; letter-spacing: 0.1em; color: var(--cream-dim);
             transition: var(--transition);
         }
-
-        .calc-toggle.active {
-            color: var(--gold);
-            background: rgba(201, 168, 76, 0.08);
-            border: 1px solid var(--gold);
-            z-index: 2;
+        .chip.active {
+            background: var(--gold-primary); color: var(--bg-primary);
+            border-color: var(--gold-primary); box-shadow: 0 0 15px var(--glow-gold);
         }
 
-        .calc-results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .calc-result-box {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--gold-border);
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .calc-formula-ref {
-            border-left: 2px solid var(--gold);
-            padding-left: 1rem;
-            margin-top: 1rem;
-        }
-
-        .quality-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .quality-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--gold-border);
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
+        textarea {
+            width: 100%; height: 120px; background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-gold); border-radius: 12px;
+            padding: 20px; color: var(--cream); font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem; resize: none; margin-bottom: 25px;
             transition: var(--transition);
         }
+        textarea:focus { border-color: var(--gold-primary); background: rgba(255,255,255,0.05); }
 
-        .quality-card.active {
-            border-color: var(--gold);
-            background: rgba(201, 168, 76, 0.05);
+        .ai-response {
+            margin-top: 40px; padding: 30px; border-left: 2px solid var(--gold-primary);
+            background: var(--bg-tertiary); display: none;
+            font-size: 1.1rem; line-height: 1.8;
         }
 
-        .quality-card div:first-child { font-size: 0.8rem; color: #fff; margin-bottom: 2px; }
-        .quality-card div:last-child { font-size: 0.65rem; color: var(--gold); }
+        /* Product Grid */
+        .stone-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+        }
+        .stone-card {
+            background: var(--bg-secondary); border: 1px solid var(--border-gold);
+            border-radius: 16px; padding: 40px 30px; text-align: center;
+            transition: var(--transition); cursor: pointer;
+            display:flex; flex-direction:column; height: 100%;
+        }
+        .stone-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 40px rgba(201,168,76,0.1);
+        }
+
+        .gem-swatch {
+            width: 70px; height: 70px; border-radius: 50%;
+            margin: 0 auto 30px; position: relative;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+        .stone-card:hover .gem-swatch { 
+            animation: pulse-gem 2s infinite ease-in-out;
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        @keyframes pulse-gem {
+            0%, 100% { box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+            50% { box-shadow: 0 0 25px var(--gem-color); }
+        }
+
+        .stone-card h3 { font-size: 1.8rem; margin-bottom: 5px; }
+        .stone-planet { font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--gold-primary); letter-spacing: 0.2em; margin-bottom: 15px; }
+        .stone-desc { font-size: 1rem; color: var(--cream-dim); margin-bottom: 25px; flex-grow: 1; }
+        .stone-price { font-weight: 700; color: var(--gold-light); font-size: 1.25rem; margin-bottom: 25px; display: block;}
+
+        .card-btns { display: flex; flex-direction: column; gap: 15px; }
+        .details-link { color: var(--cream-dim); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; font-family: 'Cinzel', serif; }
+        .details-link:hover { color: var(--gold-primary); }
+
+        /* Heritage */
+        .heritage-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .feature-stack { display: flex; flex-direction: column; gap: 20px; }
+        .feature-tile {
+            background: var(--bg-secondary); padding: 30px; border-radius: 12px;
+            display: flex; gap: 20px; border: 1px solid var(--border-gold);
+        }
+        .feature-icon { width: 40px; height: 40px; color: var(--gold-primary); flex-shrink: 0; }
+        .feature-tile h4 { font-family: 'Cinzel', serif; font-size: 0.8rem; margin-bottom: 5px; color: var(--gold-light); }
+        .feature-tile p { font-size: 0.9rem; color: var(--cream-dim); }
+
+        /* About */
+        .about-content { max-width: 700px; margin: 0 auto; text-align: center; }
+        .about-content p { font-size: 1.25rem; margin-bottom: 30px; line-height: 1.8; }
+        .trust-badges {
+            display: flex; justify-content: space-between; margin-top: 60px;
+            border-top: 1px solid var(--border-gold); padding-top: 40px;
+        }
+        .trust-badge { font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--gold-dark); }
+
+        /* Footer */
+        footer { background: var(--bg-secondary); padding: 80px 10% 40px; border-top: 1px solid var(--border-gold); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .footer-logo { margin-bottom: 20px; }
+        .footer-links { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .footer-links a { text-decoration: none; color: var(--cream-dim); font-size: 0.9rem; transition: var(--transition); }
+        .footer-links a:hover { color: var(--gold-primary); }
+        .social-icons { display: flex; gap: 20px; margin-top: 20px; }
+        .bottom-bar { text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #555; }
+
+        /* Cart Panel */
+        .side-panel {
+            position: fixed; top: 0; right: -400px; width: 380px; height: 100vh;
+            background: var(--bg-secondary); border-left: 1px solid var(--border-gold);
+            z-index: 2000; transition: var(--transition);
+            display: flex; flex-direction: column;
+        }
+        .side-panel.open { right: 0; }
+        .panel-header {
+            padding: 30px; border-bottom: 1px solid var(--border-gold);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .panel-content { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        .panel-footer { padding: 30px; border-top: 1px solid var(--border-gold); }
+
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; background: rgba(255,255,255,0.02);
+            padding: 15px; border-radius: 8px;
+        }
+        .qty-control { display: flex; align-items: center; gap: 15px; margin-top: 5px; }
+        .qty-btn { 
+            width: 24px; height: 24px; border: 1px solid var(--border-gold);
+            background: none; color: var(--cream); cursor: pointer;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px); z-index: 3000;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: var(--transition);
+        }
+        .modal-overlay.open { display: flex; opacity: 1; }
+        .modal-container {
+            background: var(--bg-secondary); border: 1px solid var(--border-gold);
+            border-radius: 16px; padding: 50px; width: 90%; max-width: 500px;
+            position: relative; transform: scale(0.95); transition: var(--transition);
+        }
+        .modal-overlay.open .modal-container { transform: scale(1); }
+
+        .field { margin-bottom: 20px; }
+        label { display: block; font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--gold-primary); margin-bottom: 8px; }
+        input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-gold); border-radius: 8px; color: var(--cream);
+        }
+
+        /* Admin */
+        .admin-layout {
+            position: fixed; inset: 0; background: var(--bg-primary); z-index: 4000;
+            display: none; grid-template-columns: 250px 1fr;
+        }
+        .sidebar { background: var(--bg-secondary); border-right: 1px solid var(--border-gold); padding: 50px 30px; }
+        .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-nav li { 
+            font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-size: 0.8rem;
+            cursor: pointer; color: var(--cream-dim); transition: var(--transition);
+        }
+        .sidebar-nav li.active { color: var(--gold-primary); }
+        .admin-main { padding: 60px; overflow-y: auto; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .nav-btn:not(.cart-btn) { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .stone-grid { grid-template-columns: 1fr; }
+            .heritage-layout { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            nav { padding: 0 5%; }
+            .hero-stats { flex-direction: column; gap: 15px; }
+            .side-panel { width: 100%; }
+        }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .loading-ring {
+            width: 40px; height: 40px; border: 2px solid var(--gold-dark);
+            border-top: 2px solid var(--gold-primary); border-radius: 50%;
+            animation: spin 1s linear infinite; margin: 20px auto;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
     </style>
-
 </head>
 <body>
 
-    <div id="announcement-banner" style="display:none; height:40px; background:var(--gold); color:var(--navy-deep); font-size:0.8rem; font-weight:700; align-items:center; justify-content:center; letter-spacing:0.1em;">
-        <!-- Banner content -->
-    </div>
-
-    <nav>
+    <nav id="navbar">
         <a href="#" class="logo">
-            <img src="logo.png" alt="Nikunj Logo">
-            <span class="brand-font">N & J's</span>
+            <div class="logo-circle">N</div>
+            <span class="brand-font" style="font-size: 1.1rem; color: var(--cream);">Nikunj</span>
         </a>
         <ul class="nav-links">
             <li><a href="#collection">Collection</a></li>
             <li><a href="#ai">AI Match</a></li>
-            <li><a href="#calculator">Calculator</a></li>
             <li><a href="#heritage">Heritage</a></li>
+            <li><a href="#about">About</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="icon-btn" onclick="toggleModal('authModal')">👤</button>
-            <button class="icon-btn" onclick="toggleModal('wishlistModal')">
-                ❤️ <span class="badge" id="wishlist-count">0</span>
+            <button class="nav-btn" onclick="openModal('authModal')" aria-label="User Profile">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </button>
-            <button class="icon-btn" onclick="toggleModal('cartModal')">
-                🛒 <span class="badge" id="cart-count">0</span>
+            <button class="nav-btn cart-btn" onclick="toggleCart()" aria-label="Cart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6z"/><path d="M3 6h18M16 10a4 4 0 01-8 0"/></svg>
+                <span class="cart-badge" id="cart-badge-count">0</span>
             </button>
-            <button class="icon-btn" id="admin-gear" onclick="openAdmin()">⚙️</button>
+            <button class="nav-btn" onclick="toggleAdmin()" aria-label="Admin Settings">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </button>
         </div>
     </nav>
 
-
     <div class="hero">
-        <img src="hero_bg.png" class="hero-bg-img" alt="Luxury Gems">
-        <div class="animated-rings ring-1"></div>
-        <div class="animated-rings ring-2"></div>
-        <div class="hero-content">
-            <h1 id="hero-h1">Destiny in Every Gem</h1>
-            <p id="hero-p">Unlock the cosmic powers of Vedic Navratan stones. Handpicked, energized, and ethically sourced from the earth's deepest reaches to your soul.</p>
-            <button class="cta-btn" id="hero-btn" onclick="scrollToSection('collection')">Explore Collection</button>
+        <canvas id="hero-canvas"></canvas>
+        <div class="reveal">
+            <h1>Destiny in Every Gem</h1>
+            <p>Unlock the cosmic powers of Vedic Navratan stones. Handpicked, energized, and ethically sourced.</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#collection" class="cta-btn">Explore Collection</a>
+                <a href="#ai" class="cta-btn" style="border: none; background: rgba(201,168,76,0.1);">AI Guide</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">9 Sacred Stones</div>
+                <div class="stat-item">100% Vedic Certified</div>
+                <div class="stat-item">Est. 1987</div>
+            </div>
         </div>
     </div>
 
-    <div class="marquee">
-        <div class="marquee-track" id="marquee-track">
-            <!-- Populated by JS -->
-        </div>
-    </div>
-
-    <section id="ai">
+    <section id="ai" class="reveal">
         <div class="section-header">
-            <h2>AI Gemstone Recommendations</h2>
-            <p>Tell us your deepest aspirations, and let the stars guide your match.</p>
+            <h2>Your Cosmic Match</h2>
+            <p>Tell us your aspiration and the stars will guide your stone.</p>
         </div>
-        <div class="ai-prompt-section">
-            <div class="prompt-input-container">
-                <input type="text" class="prompt-input" id="ai-prompt" placeholder="I am looking for healing and inner peace...">
-                <button class="prompt-btn" onclick="aiSearch()">Recommend</button>
+        <div class="ai-container">
+            <div class="chip-group" id="aspiration-chips">
+                <div class="chip" data-val="Wealth">Wealth</div>
+                <div class="chip" data-val="Love">Love</div>
+                <div class="chip" data-val="Protection">Protection</div>
+                <div class="chip" data-val="Healing">Healing</div>
+                <div class="chip" data-val="Confidence">Confidence</div>
+                <div class="chip" data-val="Spiritual">Spiritual</div>
+                <div class="chip" data-val="Education">Education</div>
+                <div class="chip" data-val="Success">Success</div>
             </div>
-            <div class="pills">
-                <span class="pill" onclick="setPrompt('Wealth & Prosperity')">Wealth</span>
-                <span class="pill" onclick="setPrompt('Love & Relationship')">Love</span>
-                <span class="pill" onclick="setPrompt('Protection from Negativity')">Protection</span>
-                <span class="pill" onclick="setPrompt('Healing & Health')">Healing</span>
-                <span class="pill" onclick="setPrompt('Confidence & Self Esteem')">Confidence</span>
-                <span class="pill" onclick="setPrompt('Spiritual Growth')">Spiritual</span>
-                <span class="pill" onclick="setPrompt('Better Focus in Studies')">Education</span>
-                <span class="pill" onclick="setPrompt('Success in Business')">Success</span>
-            </div>
-            <div id="ai-result" style="margin-top: 2rem; text-align: center; color: var(--gold); font-weight: 600;"></div>
+            <textarea id="ai-input" placeholder="Describe your life situation or ask about planetary alignments..."></textarea>
+            <button class="cta-btn" style="width: 100%;" onclick="revealGemstone()">Reveal My Gemstone</button>
+            <div id="ai-loading" style="display: none;"><div class="loading-ring"></div></div>
+            <div id="ai-result" class="ai-response"></div>
         </div>
     </section>
 
-    <section id="collection">
+    <section id="collection" class="reveal">
         <div class="section-header">
-            <span style="font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem;">Earth's Sacred Treasures</span>
-            <h2 class="brand-font">9 Divine Stones</h2>
-            <p style="font-family:'Cormorant Garamond', serif; font-style:italic;">The Navratna - Nine Planetary Gemstones for cosmic balance.</p>
+            <h2>9 Divine Stones</h2>
+            <p>The Navratna — Nine Planetary Gemstones for cosmic balance.</p>
         </div>
-        <div id="stonesGrid">
-            <!-- Dynamically populated by renderStones() -->
+        <div class="stone-grid" id="product-grid">
+            <!-- Stones injected via JS -->
         </div>
     </section>
 
-
-    <section id="calculator" style="background: var(--navy-deep);">
-        <div class="section-header">
-            <span style="font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:1rem;">Sacred Measurement Tool</span>
-            <h2 class="brand-font">Carat Calculator</h2>
-            <p style="font-family:'Cormorant Garamond', serif; font-style:italic;">Convert grams or milligrams to carats instantly.</p>
-            <div style="width:60px; height:1px; background:var(--gold); margin: 2rem auto;"></div>
-        </div>
-
-        <div style="max-width: 1200px; margin: 0 auto;" class="calc-container-grid-wrapper">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;" class="calc-inner-grid">
-                <!-- Left Panel: Weight Converter -->
-                <div class="calc-panel">
-                    <h3 class="brand-font" style="font-size: 1.2rem; color: #fff; margin-bottom: 2rem;">Weight Converter</h3>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:0.8rem;">Toggle Input Unit</label>
-                        <div class="calc-toggle-group">
-                            <button id="toggle-g" class="calc-toggle active" onclick="setCalcUnit('g')">Grams (g)</button>
-                            <button id="toggle-mg" class="calc-toggle" onclick="setCalcUnit('mg')">Milligrams (mg)</button>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 2rem;">
-                        <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:0.8rem;">Enter Weight</label>
-                        <input type="number" id="calc-input" placeholder="0.00" oninput="updateConverter()" style="font-size: 1.2rem; padding: 1rem; width: 100%;">
-                    </div>
-
-                    <div class="calc-results-grid">
-                        <div class="calc-result-box" style="grid-column: span 2; border-color: var(--gold);">
-                            <div style="font-size:0.65rem; color:var(--gold); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.5rem;">Carat Weight</div>
-                            <div id="res-carat" style="font-size:2.5rem; font-family:Cinzel; color:var(--gold);">0.00</div>
-                        </div>
-                        <div class="calc-result-box">
-                            <div style="font-size:0.6rem; color:#888; text-transform:uppercase; margin-bottom:0.3rem;">Ratti</div>
-                            <div id="res-ratti" style="font-size:1.1rem; color:var(--gold);">0.00</div>
-                            <div style="font-size:0.5rem; color:#555; margin-top:5px;">Traditional Measure (0.91 ct)</div>
-                        </div>
-                        <div class="calc-result-box">
-                            <div style="font-size:0.6rem; color:#888; text-transform:uppercase; margin-bottom:0.3rem;" id="res-alt-label">Milligrams</div>
-                            <div id="res-alt-val" style="font-size:1.1rem; color:#fff;">0.00</div>
-                        </div>
-                    </div>
-
-                    <div class="calc-formula-ref">
-                        <div style="font-size:0.75rem; color:var(--gold-light); margin-bottom:5px;">1 Carat = 0.2 grams</div>
-                        <div style="font-size:0.75rem; color:var(--gold-light); margin-bottom:5px;">1 Carat = 200 milligrams</div>
-                        <div style="font-size:0.75rem; color:var(--gold-light); margin-bottom:5px;">Carats = Grams × 5</div>
-                        <div style="font-size:0.75rem; color:var(--gold-light);">Carats = Milligrams ÷ 200</div>
+    <section id="heritage" class="reveal">
+        <div class="heritage-layout">
+            <div>
+                <h2>Heritage of Authenticity</h2>
+                <p style="font-size: 1.25rem; color: var(--cream-dim); margin-top: 20px;">For over three generations, we have been more than just jewellers; we are custodians of Vedic tradition. Our journey began in the pink heart of Jaipur, where we learned the sacred art of identifying 'Prana' — the life force within every gemstone.</p>
+            </div>
+            <div class="feature-stack">
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <div>
+                        <h4>Vedic Certification</h4>
+                        <p>Every stone is analyzed for cosmic potency and planetary alignment by master gemologists.</p>
                     </div>
                 </div>
-
-                <!-- Right Panel: Price Estimator -->
-                <div class="calc-panel">
-                    <h3 class="brand-font" style="font-size: 1.2rem; color: #fff; margin-bottom: 2rem;">Price Estimator</h3>
-
-                    <div style="margin-bottom: 2rem;">
-                        <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:0.8rem;">Stone Variety</label>
-                        <select id="est-stone-select" onchange="updateEstimator()" style="padding: 1rem; width: 100%;">
-                            <!-- Populated by JS -->
-                        </select>
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <div>
+                        <h4>Ethical Sourcing</h4>
+                        <p>We trace our gems back to their geological origin, ensuring ethical labor and zero conflict.</p>
                     </div>
-
-                    <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-                        <div style="flex: 2;">
-                            <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:0.8rem;">Enter Stone Weight</label>
-                            <input type="number" id="est-input" placeholder="0.00" oninput="updateEstimator()" style="padding: 1rem; width: 100%;">
-                        </div>
-                        <div style="flex: 1;">
-                            <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:0.8rem;">Weight Unit</label>
-                            <select id="est-unit" onchange="updateEstimator()" style="padding: 1rem; width: 100%;">
-                                <option value="g">G rams</option>
-                                <option value="mg">M illigrams</option>
-                                <option value="ct">C arats</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <div>
+                        <h4>Energized Gems</h4>
+                        <p>Stones are purified through traditional Vedic rituals before they ever reach your fingertips.</p>
                     </div>
-
-                    <div style="margin-bottom: 2rem;">
-                        <label style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; color:#888; display:block; margin-bottom:1rem;">Quality Grade</label>
-                        <div class="quality-grid">
-                            <div class="quality-card active" onclick="setQualityGrade(1, this)">
-                                <div>Commercial</div><div>1.0x Base</div>
-                            </div>
-                            <div class="quality-card" onclick="setQualityGrade(1.4, this)">
-                                <div>Good</div><div>1.4x Base</div>
-                            </div>
-                            <div class="quality-card" onclick="setQualityGrade(2.0, this)">
-                                <div>Fine</div><div>2.0x Base</div>
-                            </div>
-                            <div class="quality-card" onclick="setQualityGrade(3.5, this)">
-                                <div>Premium</div><div>3.5x Base</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="background: rgba(201,168,76,0.05); border: 1px solid var(--gold); padding: 1.5rem; text-align: center;">
-                        <div id="est-breakdown" style="font-size: 0.7rem; color: #888; margin-bottom: 0.5rem;">Select stone and enter weight</div>
-                        <div id="est-total-price" style="font-size: 2rem; font-family: Cinzel; color: var(--gold);">₹0</div>
-                        <div style="font-size: 0.6rem; color: #555; margin-top: 5px;">*Estimated price subject to ±20% variation</div>
-                    </div>
-
-                    <button class="cta-btn" onclick="addEstimatorToCart()" style="width: 100%; margin-top: 2rem;">Add to Vault →</button>
                 </div>
             </div>
         </div>
-
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="javascript:void(0)" onclick="resetCalculator()" style="font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 2.5px; text-decoration: none; border-bottom: 1px solid #555; padding-bottom: 2px; transition: var(--transition);">Reset Calculator</a>
-        </div>
     </section>
 
-
-    <section id="heritage" style="background: var(--navy-light);">
-        <div class="section-header">
-            <h2>Heritage of Authenticity</h2>
-            <p>Generations of mastery in planetary gemology.</p>
-        </div>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2rem; text-align:center;">
-            <div style="padding:2rem; border:1px solid var(--glass-border); background:var(--navy);">
-                <div style="font-size:3rem; margin-bottom:1rem;">🔱</div>
-                <h3 style="color:var(--gold); margin-bottom:1rem;">Vedic Certification</h3>
-                <p style="color:#888; font-size:0.9rem;">Every stone is analyzed for its 'Prana' and planetary alignment by certified astrologers.</p>
-            </div>
-            <div style="padding:2rem; border:1px solid var(--gold); background:var(--navy); transform:scale(1.1); z-index:2;">
-                <div style="font-size:3rem; margin-bottom:1rem;">🏢</div>
-                <h3 style="color:var(--gold); margin-bottom:1rem;">Ethical Sourcing</h3>
-                <p style="color:#888; font-size:0.9rem;">Direct mining partnerships ensuring conflict-free, earth-reverent extraction processes.</p>
-            </div>
-            <div style="padding:2rem; border:1px solid var(--glass-border); background:var(--navy);">
-                <div style="font-size:3rem; margin-bottom:1rem;">✨</div>
-                <h3 style="color:var(--gold); margin-bottom:1rem;">Energized Gems</h3>
-                <p style="color:#888; font-size:0.9rem;">Before delivery, gems undergo traditional purification rituals under auspicious planetary hours.</p>
+    <section id="about" class="reveal">
+        <div class="about-content">
+            <h2>About Nikunj</h2>
+            <p>The story of Nikunj is a testament to the timeless bond between the earth's treasures and the human soul. Based in the historical gemstone capital of Jaipur, Rajasthan, we merge centuries-old Vedic wisdom with the precision of modern gemology.</p>
+            <p>Our founder, a third-generation gemologist, hand-selects every rough from certified mines in Burma, Ceylon, and Colombia. To us, a Navratan is not just jewellery—it is a spiritual instrument calculated for your unique astrological alignment.</p>
+            <div class="trust-badges">
+                <span class="trust-badge">Est. 1987</span>
+                <span class="trust-badge">10,000+ Stones Sold</span>
+                <span class="trust-badge">Jaipur Crafted</span>
+                <span class="trust-badge">Vedic Certified</span>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <h4 class="brand-font">N & J's</h4>
-                <p style="font-size: 0.9rem; color: #888;">Modern Vedic astrology meets artisan jewellery design. Authentically sourced, cosmically aligned.</p>
+            <div>
+                <div class="logo footer-logo">
+                    <div class="logo-circle">N</div>
+                    <span class="brand-font" style="font-size: 1.1rem; color: var(--cream);">Nikunj</span>
+                </div>
+                <p style="color: var(--cream-dim); font-size: 0.9rem;">Destiny in Every Gem. Crafting cosmic alignment through sacred stones since 1987.</p>
+                <div class="social-icons">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="#">The Collection</a></li>
+            <div>
+                <h4 class="brand-font" style="color: var(--gold-primary); margin-bottom: 20px;">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#collection">Collection</a></li>
                     <li><a href="#">Loose Stones</a></li>
                     <li><a href="#">Custom Setting</a></li>
                     <li><a href="#">Gift Cards</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <ul>
                     <li><a href="#">Stone Care</a></li>
                     <li><a href="#">Authenticity</a></li>
                     <li><a href="#">Shipping</a></li>
                     <li><a href="#">Returns</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <p style="font-size: 0.9rem; color: #888;">123 Jewelers Lane, Gold City.<br>contact@nikunj.com</p>
+            <div>
+                <h4 class="brand-font" style="color: var(--gold-primary); margin-bottom: 20px;">Contact</h4>
+                <p style="color: var(--cream-dim); font-size: 0.9rem; margin-bottom: 15px;">123 Jewelers Lane, Jaipur, Rajasthan 302001</p>
+                <p style="color: var(--cream-dim); font-size: 0.9rem; margin-bottom: 15px;">contact@nikunj.com</p>
+                <p style="color: var(--cream-dim); font-size: 0.9rem;">+91 98765 43210</p>
             </div>
         </div>
-        <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem; text-align: center; color: #555; font-size: 0.8rem;">
-            &copy; 2026 N & J's Jewellery. All rights reserved.
+        <div class="bottom-bar">
+            © 2026 Nikunj Jewellery. All rights reserved. | Vedic Astrology × Modern Commerce
         </div>
     </footer>
 
-    <!-- Modals -->
-    <div id="authModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 500px;">
-            <span class="close-modal" onclick="toggleModal('authModal')">&times;</span>
-            <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-                <h2 onclick="toggleAuthTab('signin')" id="tab-signin" style="cursor: pointer; opacity: 1;">Sign In</h2>
-                <h2 onclick="toggleAuthTab('register')" id="tab-register" style="cursor: pointer; opacity: 0.5;">Register</h2>
+    <!-- Cart Side Panel -->
+    <div id="cartPanel" class="side-panel">
+        <div class="panel-header">
+            <h3 class="brand-font">Your Vault</h3>
+            <button class="nav-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="panel-content" id="cart-content">
+            <!-- Items injected via JS -->
+        </div>
+        <div class="panel-footer" id="cart-footer">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" style="color: var(--gold-primary); font-weight: 700;">₹0</span>
             </div>
-            <div id="signin-form">
-                <input type="email" id="login-email" placeholder="Email" style="margin-bottom:1rem;">
-                <input type="password" id="login-pwd" placeholder="Password" style="margin-bottom:2rem;">
-                <button class="cta-btn" style="width:100%" onclick="login()">Enter the Vault</button>
-            </div>
-            <div id="register-form" style="display: none;">
-                <input type="text" id="reg-name" placeholder="Full Name" style="margin-bottom:1rem;">
-                <input type="date" id="reg-date" style="margin-bottom:1rem;">
-                <input type="time" id="reg-time" style="margin-bottom:1rem;">
-                <input type="text" id="reg-city" placeholder="Birth City" style="margin-bottom:1rem;">
-                <button class="cta-btn" style="width:100%" onclick="register()">Create Profile</button>
-            </div>
-            <div id="user-profile" style="display: none; text-align: center;">
-                <div style="font-size: 4rem; color: var(--gold);">🔱</div>
-                <h2 id="profile-name" class="brand-font" style="margin-bottom: 1rem;"></h2>
-                <div id="cosmic-insight" style="background: var(--navy-light); padding: 1.5rem; border: 1px solid var(--gold-border); margin-bottom: 2rem;">
-                    <h3 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem;">Cosmic Alignment</h3>
-                    <p id="insight-text" style="color: #888; font-size: 0.8rem;"></p>
-                </div>
-                <button class="cta-btn" onclick="logout()">Seal the Vault</button>
+            <button class="cta-btn" style="width: 100%;" onclick="checkout()">Secure Checkout</button>
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="javascript:void(0)" onclick="toggleCart()" class="details-link">Continue Shopping</a>
             </div>
         </div>
     </div>
 
-    <div id="stoneModal" class="modal-overlay">
-        <div class="modal-content" id="stone-modal-body" style="max-width: 900px;"></div>
-    </div>
-
-    <div id="wishlistModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 600px;">
-            <span class="close-modal" onclick="toggleModal('wishlistModal')">&times;</span>
-            <h2 class="brand-font" style="margin-bottom: 2rem; color: var(--gold);">Your Wishlist</h2>
-            <div id="wishlist-items" style="margin-bottom: 2rem; display:flex; flex-direction:column; gap:1rem;"></div>
-            <div style="text-align: right; border-top: 1px solid var(--gold-border); padding-top: 1.5rem;">
-                <button class="cta-btn" onclick="addAllWishlistToCart()">Move All to Vault</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cartModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 600px;">
-            <span class="close-modal" onclick="toggleModal('cartModal')">&times;</span>
-            <h2 class="brand-font" style="margin-bottom: 2rem; color: var(--gold);">Your Vault</h2>
-            <div id="cart-items" style="margin-bottom: 1.5rem; display:flex; flex-direction:column; gap:1rem;"></div>
-            <div id="cart-summary" style="background:rgba(255,255,255,0.02); padding:1.5rem; border: 1px solid var(--gold-border);"></div>
-            <div style="margin-top: 1.5rem; text-align: right;">
-                <button class="cta-btn" style="width:100%" onclick="openCheckout()">Secure Checkout</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="checkoutModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 860px;">
-            <span class="close-modal" onclick="toggleModal('checkoutModal')">&times;</span>
-            <div style="display:flex; justify-content:space-between; margin-bottom:3rem; border-bottom:1px solid var(--gold-border); padding-bottom:1rem;">
-                <div id="step1-tab" style="color:var(--gold); border-bottom:2px solid var(--gold); padding:0 1rem 5px;">① DELIVERY</div>
-                <div id="step2-tab" style="color:#555; padding:0 1rem;">② PAYMENT</div>
-                <div id="step3-tab" style="color:#555; padding:0 1rem;">③ CONFIRMED</div>
-            </div>
-            <div id="checkout-steps">
-                <div id="checkout-step-1">
-                    <h2 class="brand-font" style="margin-bottom:2rem;">Delivery Details</h2>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
-                        <input type="text" id="chk-name" placeholder="Full Name">
-                        <input type="email" id="chk-email" placeholder="Email Address">
-                        <div style="position:relative;"><span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:0.8rem; color:var(--gold);">+91</span><input type="text" id="chk-phone" placeholder="Phone Number" style="padding-left:3rem;"></div>
-                        <input type="text" id="chk-city" placeholder="City">
-                        <select id="chk-state"><option>Select State</option><option>Maharashtra</option><option>Delhi</option><option>Karnataka</option><option>Gujarat</option><option>Tamil Nadu</option></select>
-                        <input type="text" id="chk-pincode" placeholder="PIN Code" maxlength="6">
-                    </div>
-                    <button class="cta-btn" style="width:100%; margin-top:2rem;" onclick="nextCheckoutStep(2)">Continue to Payment →</button>
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay" onclick="if(event.target === this) closeModal('authModal')">
+        <div class="modal-container">
+            <div id="loginView">
+                <h2 style="text-align: center; margin-bottom: 30px;">Enter the Vault</h2>
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="priya@example.com">
                 </div>
-                <div id="checkout-step-2" style="display:none;">
-                    <div style="display:grid; grid-template-columns: 1.3fr 1fr; gap:2rem;">
-                        <div>
-                            <h2 class="brand-font" style="margin-bottom:2rem;">Payment Method</h2>
-                            <div class="radio-grid" style="grid-template-columns:1fr;">
-                                <div class="radio-card selected" onclick="setPayment('upi', this)">
-                                    <div style="font-weight:600; font-size:0.9rem;">UPI (GPay / PhonePe)</div>
-                                    <div style="font-size:0.7rem; color:#888;">Universal Payment Interface</div>
-                                </div>
-                                <div class="radio-card" onclick="setPayment('card', this)">
-                                    <div style="font-weight:600; font-size:0.9rem;">Credit / Debit Card</div>
-                                </div>
-                                <div class="radio-card" onclick="setPayment('cod', this)">
-                                    <div style="font-weight:600; font-size:0.9rem;">Cash on Delivery</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="background:rgba(255,255,255,0.02); padding:1.5rem; border:1px solid var(--gold-border);">
-                            <h3 class="brand-font" style="font-size:0.9rem; margin-bottom:1rem; color:var(--gold);">Order Summary</h3>
-                            <div id="checkout-summary-items" style="font-size:0.8rem; display:grid; gap:0.5rem;"></div>
-                            <div id="checkout-totals" style="margin-top:1rem; border-top:1px solid var(--gold-border); padding-top:1rem; font-weight:600;"></div>
-                        </div>
-                    </div>
-                    <div style="display:flex; gap:1rem; margin-top:2rem;">
-                        <button class="cta-btn" style="background:transparent; border:1px solid var(--gold); color:var(--gold);" onclick="nextCheckoutStep(1)">← Back</button>
-                        <button class="cta-btn" style="flex:1;" onclick="completeOrder()">Place Order →</button>
-                    </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
                 </div>
-                <div id="checkout-step-3" style="display:none; text-align:center; padding:2rem 0;">
-                    <div style="width:80px; height:80px; border:2px solid var(--gold); border-radius:50%; margin:0 auto 2rem; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:2rem;">✓</div>
-                    <h2 class="brand-font" style="font-size:2.5rem; color:var(--gold); margin-bottom:1rem;">Order Placed!</h2>
-                    <p style="margin-bottom:2rem; color:#888;">Order ID: <span id="conf-order-id" style="color:var(--white);">#NKJ-2026-6412</span></p>
-                    <button class="cta-btn" onclick="closeCheckout();">Continue Shopping</button>
+                <button class="cta-btn" style="width: 100%;" onclick="closeModal('authModal')">Sign In</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" class="details-link" style="display: block; margin-bottom: 10px;">Forgot your alignment?</a>
+                    <a href="javascript:void(0)" onclick="toggleAuthView()" class="details-link" style="color: var(--gold-light);">New to Nikunj? Create Profile</a>
+                </div>
+            </div>
+            <div id="registerView" style="display: none;">
+                <h2 style="text-align: center; margin-bottom: 30px;">Create Profile</h2>
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Priya Sharma">
+                </div>
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="priya@example.com">
+                </div>
+                <div class="field">
+                    <label>Date of Birth</label>
+                    <input type="date">
+                </div>
+                <button class="cta-btn" style="width: 100%;" onclick="closeModal('authModal')">Create Profile</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="javascript:void(0)" onclick="toggleAuthView()" class="details-link" style="color: var(--gold-light);">Already have a profile? Sign In</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- AI Chatbot elements -->
-    <div id="chat-float" onclick="toggleChat()"><div class="pulse-ring"></div><span style="font-size:1.5rem;">✦</span></div>
-    <div id="chat-panel">
-        <div class="chat-header"><div class="brand-font" style="font-size:0.95rem; color:var(--gold);">Nikunj AI</div><div style="cursor:pointer;" onclick="toggleChat()">✕</div></div>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div style="padding:1rem; border-top:1px solid var(--gold-border);">
-            <div style="display:flex; gap:0.5rem;"><input type="text" id="chat-input" placeholder="Ask about gems..." onkeypress="if(event.key==='Enter') sendChatMessage()"><button onclick="sendChatMessage()" style="background:var(--gold); border:none; padding:0 1rem; color:var(--navy-deep); font-weight:bold;">→</button></div>
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-layout">
+        <div class="sidebar">
+            <h3 class="brand-font" style="color: var(--gold-primary); margin-bottom: 40px;">Sanctum</h3>
+            <ul class="sidebar-nav">
+                <li class="active" onclick="switchAdminTab('dashboard', this)">Dashboard</li>
+                <li onclick="switchAdminTab('inventory', this)">Inventory</li>
+                <li onclick="switchAdminTab('orders', this)">Orders</li>
+                <li onclick="switchAdminTab('customers', this)">Customers</li>
+                <li onclick="switchAdminTab('analytics', this)">Analytics</li>
+                <li onclick="switchAdminTab('settings', this)">Settings</li>
+            </ul>
+            <button class="cta-btn" style="margin-top: 100px; padding: 10px 20px;" onclick="toggleAdmin()">Exit Sanctum</button>
+        </div>
+        <div class="admin-main" id="admin-view">
+            <!-- Tabs injected via JS -->
         </div>
     </div>
-    <div id="toast-container"></div>
-    <div class="whatsapp-float" onclick="window.open('https://wa.me/919820000000', '_blank')">💬</div>
 
-    <!-- Admin Modal -->
-    <div id="adminModal" class="modal-overlay">
-        <!-- Part A: Login Gate -->
-        <div class="modal-content" id="admin-gate-view" style="max-width: 420px; text-align: center; border-color: rgba(201,168,76,0.3);">
-            <span class="close-modal" onclick="toggleModal('adminModal')">&times;</span>
-            <div style="font-size: 2.5rem; color: var(--gold); margin-bottom: 0.5rem;">✦</div>
-            <h2 class="brand-font" style="font-size: 1.4rem; color: var(--gold);">Sanctum Access</h2>
-            <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: #888; margin-bottom: 2rem;">Restricted to authorized personnel only</p>
-            
-            <div id="admin-login-err" style="color: #ff4444; font-size: 0.75rem; margin-bottom: 1rem; display: none;">Invalid credentials. Access denied.</div>
-            
-            <input type="email" id="admin-email-field" placeholder="Admin Email" style="margin-bottom: 1rem;">
-            <input type="password" id="admin-pwd-field" placeholder="Password" style="margin-bottom: 1.5rem;">
-            <button class="cta-btn" style="width: 100%; letter-spacing: 0.2em;" onclick="submitAdminAuth()">Enter Sanctum</button>
-            <p style="font-size: 0.6rem; color: #555; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Access restricted to nikunjphophalia@gmail.com</p>
-        </div>
-
-        <!-- Part B: Full Admin Portal -->
-        <div class="modal-content" id="admin-portal-view" style="max-width: 1200px; padding: 0; display: none;">
-            <div style="position: sticky; top: 0; background: #0D0906; z-index: 10; padding: 1.5rem 2rem; border-bottom: 1px solid var(--gold-border); display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <span style="color: var(--gold);">✦</span>
-                    <h2 class="brand-font" style="font-size: 1rem; color: #fff; margin: 0;">Sanctum Control</h2>
-                    <span style="font-size: 0.65rem; color: var(--gold); background: rgba(201,168,76,0.1); padding: 2px 8px;">Logged in: nikunjphophalia@gmail.com</span>
-                </div>
-                <div style="display: flex; gap: 1.5rem; align-items: center;">
-                    <button class="cta-btn" style="background: transparent; border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 0.5rem 1rem; font-size: 0.65rem;" onclick="adminSignOut()">Sign Out</button>
-                    <span class="close-modal" onclick="toggleModal('adminModal')" style="position: static; font-size: 1.2rem;">✕</span>
-                </div>
-            </div>
-
-            <div class="admin-nav" style="display: flex; background: var(--navy-light); border-bottom: 1px solid var(--gold-border);">
-                <div class="admin-nav-item active" onclick="switchAdminTab('dashboard')" id="tab-dashboard">Dashboard</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('orders')" id="tab-orders">Orders</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('inventory')" id="tab-inventory">Inventory</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('customers')" id="tab-customers">Customers</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('analytics')" id="tab-analytics">Analytics</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('site-editor')" id="tab-site-editor">Site Editor</div>
-                <div class="admin-nav-item" onclick="switchAdminTab('settings')" id="tab-settings">Settings</div>
-            </div>
-
-            <div id="admin-tab-content" style="padding: 2.5rem; max-height: 70vh; overflow-y: auto;">
-                <!-- Content generated by JS -->
-            </div>
-        </div>
-    </div>
-    
     <script>
-        const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE';
-
+        // --- State ---
         const STONES = [
-            { id: 1, name: "Ruby", hindi: "Manik", sanskrit: "Manikya", planet: "Sun", color: "#e0115f", glow: "rgba(224, 17, 95, 0.4)", tint: "rgba(224, 17, 95, 0.05)", price: "₹18,000", priceNum: 18000, stock: 12, category: "Precious", desc: "The king of gems, Manikya bestows authority, energy, and royal radiance.", keywords: ["Success", "Power", "Fame", "Wealth", "Authority", "Sun"], svgPath: "M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" },
-            { id: 2, name: "Pearl", hindi: "Moti", sanskrit: "Mukta", planet: "Moon", color: "#fefdfa", glow: "rgba(254, 253, 250, 0.4)", tint: "rgba(254, 253, 250, 0.05)", price: "₹3,500", priceNum: 3500, stock: 45, category: "Biological", desc: "Soothing lunar energy to calm the mind and bring domestic harmony.", keywords: ["Peace", "Emotion", "Calm", "Moon", "Healing"], svgPath: "M50 10 A40 40 0 1 1 50 90 A40 40 0 1 1 50 10 Z" },
-            { id: 3, name: "Red Coral", hindi: "Moonga", sanskrit: "Vidruma", planet: "Mars", color: "#ff4433", glow: "rgba(255, 68, 51, 0.4)", tint: "rgba(255, 68, 51, 0.05)", price: "₹2,800", priceNum: 2800, stock: 30, category: "Biological", desc: "Boosts stamina and provides divine protection from adversaries.", keywords: ["Courage", "Protection", "Energy", "Mars", "Vitality"], svgPath: "M20 80 L35 40 L50 20 L65 40 L80 80 Z" },
-            { id: 4, name: "Emerald", hindi: "Panna", sanskrit: "Marakata", planet: "Mercury", color: "#50c878", glow: "rgba(80, 200, 120, 0.4)", tint: "rgba(80, 200, 120, 0.05)", price: "₹25,000", priceNum: 25000, stock: 8, category: "Precious", desc: "Enhances intellect, memory, and powers of speech.", keywords: ["Communication", "Focus", "Knowledge", "Mercury", "Intellect"], svgPath: "M30 10 L70 10 L90 30 L90 70 L70 90 L30 90 L10 70 L10 30 Z" },
-            { id: 5, name: "Yellow Sapphire", hindi: "Pukhraj", sanskrit: "Pushparaja", planet: "Jupiter", color: "#f9d71c", glow: "rgba(249, 215, 28, 0.4)", tint: "rgba(249, 215, 28, 0.1)", price: "₹12,000", priceNum: 12000, stock: 15, category: "Precious", desc: "The ultimate stone for divine grace, wisdom, and material success.", keywords: ["Wealth", "Prosperity", "Jupiter", "Wisdom", "Success"], svgPath: "M50 5 L90 40 L75 90 L25 90 L10 40 Z" },
-            { id: 6, name: "Diamond", hindi: "Heera", sanskrit: "Vajra", planet: "Venus", color: "#ffffff", glow: "rgba(255, 255, 255, 0.4)", tint: "rgba(255, 255, 255, 0.05)", price: "₹85,000", priceNum: 85000, stock: 4, category: "Precious", desc: "Exquisite brilliance for ultimate refinement and romantic success.", keywords: ["Love", "Luxury", "Venus", "Beauty", "Marriage"], svgPath: "M50 5 L95 45 L50 95 L5 45 Z" },
-            { id: 7, name: "Blue Sapphire", hindi: "Neelam", sanskrit: "Neelamani", planet: "Saturn", color: "#00308f", glow: "rgba(0, 48, 143, 0.4)", tint: "rgba(0, 48, 143, 0.1)", price: "₹40,000", priceNum: 40000, stock: 6, category: "Precious", desc: "A powerful, transformative gem for profound karmic alignment.", keywords: ["Karma", "Discipline", "Saturn", "Focus", "Protection"], svgPath: "M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z" },
-            { id: 8, name: "Hessonite", hindi: "Gomed", sanskrit: "Gomedaka", planet: "Rahu", color: "#cd7f32", glow: "rgba(205, 127, 50, 0.4)", tint: "rgba(205, 127, 50, 0.05)", price: "₹4,500", priceNum: 4500, stock: 22, category: "Semi-Precious", desc: "Overcomes obstacles and clears illusions on the path to victory.", keywords: ["Victory", "Rahu", "Ambition", "Success", "Clarity"], svgPath: "M20 20 L80 20 L80 80 L20 80 Z" },
-            { id: 9, name: "Cat's Eye", hindi: "Lehsunia", sanskrit: "Vaidurya", planet: "Ketu", color: "#808000", glow: "rgba(128, 128, 0, 0.4)", tint: "rgba(128, 128, 0, 0.05)", price: "₹8,000", priceNum: 8000, stock: 18, category: "Semi-Precious", desc: "A mystical talisman for spiritual awakening and supernatural protection.", keywords: ["Spiritual", "Ketu", "Protection", "Intuition", "Mystery"], svgPath: "M50 10 L80 50 L50 90 L20 50 Z" }
+            { id: 1, name: "Ruby", local: "Manik", planet: "Sun", metal: "Gold", finger: "Ring", price: 45000, priceStr: "₹45,000", weight: "3.25 Ratti", color: "#9B1C1C", desc: "Enhances leadership, vitality, and confidence. Governs the Sun's energy." },
+            { id: 2, name: "Pearl", local: "Moti", planet: "Moon", metal: "Silver", finger: "Little", price: 8500, priceStr: "₹8,500", weight: "5.00 Ratti", color: "#F0EDE5", desc: "Brings emotional calm, nurtures relationships, and enhances intuition." },
+            { id: 3, name: "Red Coral", local: "Moonga", planet: "Mars", metal: "Gold/Copper", finger: "Ring", price: 12000, priceStr: "₹12,000", weight: "6.00 Ratti", color: "#B55A3A", desc: "Boosts courage, energy, and protection against negative forces." },
+            { id: 4, name: "Emerald", local: "Panna", planet: "Mercury", metal: "Gold", finger: "Little", price: 55000, priceStr: "₹55,000", weight: "2.50 Ratti", color: "#1B4D3E", desc: "Sharpens intellect, business acumen, and communication." },
+            { id: 5, name: "Yellow Sapphire", local: "Pukhraj", planet: "Jupiter", metal: "Gold", finger: "Index", price: 38000, priceStr: "₹38,000", weight: "4.00 Ratti", color: "#C47A1E", desc: "Attracts wisdom, wealth, and spiritual growth." },
+            { id: 6, name: "Diamond", local: "Heera", planet: "Venus", metal: "Platinum", finger: "Middle", price: 180000, priceStr: "₹1,80,000", weight: "1.00 Carat", color: "#D8D8D8", desc: "Amplifies beauty, luxury, and harmonious relationships." },
+            { id: 7, name: "Blue Sapphire", local: "Neelam", planet: "Saturn", metal: "Silver", finger: "Middle", price: 72000, priceStr: "₹72,000", weight: "3.00 Ratti", color: "#1B2A6B", desc: "Fastest-acting stone. Brings discipline, focus, and karmic justice." },
+            { id: 8, name: "Hessonite", local: "Gomed", planet: "Rahu", metal: "Silver", finger: "Middle", price: 9500, priceStr: "₹9,500", weight: "5.25 Ratti", color: "#8B4513", desc: "Neutralizes the malefic effects of Rahu; brings clarity and success." },
+            { id: 9, name: "Cat's Eye", local: "Lehsunia", planet: "Ketu", metal: "Silver", finger: "Middle", price: 22000, priceStr: "₹22,000", weight: "4.50 Ratti", color: "#8B8000", desc: "Protects against accidents and Ketu's shadow; enhances intuition." }
         ];
 
-        // Ensure compatibility with old admin logic
-        const stones = STONES;
+        let cartItems = [];
 
+        // --- Stars Particles ---
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
 
-        let cart = JSON.parse(localStorage.getItem('nikunj_cart')) || [];
-        let wishlist = JSON.parse(localStorage.getItem('nikunj_wishlist')) || [];
-        let chatHistory = JSON.parse(sessionStorage.getItem('nikunj_chat')) || [];
-        let currentShape = 'Round';
-        let currentQuality = 1.0;
-        let checkoutTotal = 0;
-
-        function showToast(msg) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerText = msg;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3500);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
 
-        function getGemSVG(stone, size = 120) {
-            const glow = stone.glow || 'rgba(255,255,255,0.2)';
-            const path = stone.svgPath || 'M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z';
-            return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" style="--glow: ${glow};">
-                <defs>
-                    <radialGradient id="grad-${stone.id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" style="stop-color:${stone.color};stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#000;stop-opacity:1" />
-                    </radialGradient>
-                </defs>
-                <path d="${path}" fill="url(#grad-${stone.id})" stroke="white" stroke-width="0.3" />
-                <path d="${path}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" style="filter:blur(2px);" />
-            </svg>`;
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.vx = (Math.random() - 0.5) * 0.2;
+                this.vy = (Math.random() - 0.5) * 0.2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if(this.x < 0) this.x = canvas.width;
+                if(this.x > canvas.width) this.x = 0;
+                if(this.y < 0) this.y = canvas.height;
+                if(this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = '#C9A84C';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        function renderStones() {
-            const grid = document.getElementById('stonesGrid');
-            if(!grid) return;
-            grid.innerHTML = STONES.map(s => {
-                const isWish = wishlist.includes(s.id);
-                return `
-                <div class="stone-card" onclick="openStoneModal(${s.id})">
-                    <button class="wishlist-heart" onclick="toggleWishlist(${s.id}, event)">
-                        ${isWish ? '❤️' : '♡'}
-                    </button>
-                    <div class="gem-display" style="--tint: ${s.tint}; --glow: ${s.glow}">
-                        ${getGemSVG(s, 140)}
+        function initStars() {
+            stars = [];
+            for(let i=0; i<80; i++) stars.push(new Star());
+        }
+
+        function animateStars() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            stars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(animateStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        initStars();
+        animateStars();
+
+        // --- Render Products ---
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = STONES.map(s => `
+                <div class="stone-card">
+                    <div class="gem-swatch" style="background-color: ${s.color}; --gem-color: ${s.color}"></div>
+                    <div class="stone-planet">${s.planet}</div>
+                    <h3>${s.name} (${s.local})</h3>
+                    <p class="stone-desc">${s.desc}</p>
+                    <span class="stone-price">${s.priceStr}</span>
+                    <div class="card-btns">
+                        <button class="cta-btn" onclick="addToCart(${s.id})">Add to Vault</button>
+                        <a href="#" class="details-link">Details</a>
                     </div>
-                    <div class="stone-info">
-                        <div style="font-size:0.6rem; color:var(--gold); text-transform:uppercase; letter-spacing:2px; margin-bottom:0.4rem;">${s.planet}</div>
-                        <h3 class="brand-font" style="font-size:1.3rem; margin-bottom:0.2rem;">${s.name}</h3>
-                        <div style="font-family:'Cormorant Garamond', serif; font-style:italic; color:#888; font-size:0.9rem; margin-bottom:1rem;">
-                            ${s.hindi} &bull; ${s.sanskrit}
-                        </div>
-                        <div style="color:var(--gold); font-weight:600; font-size:1.1rem;">
-                            ${s.price} <span style="font-size:0.65rem; color:#555; font-weight:400; text-transform:uppercase; letter-spacing:1px; margin-left:5px;">per carat</span>
-                        </div>
-                    </div>
-                    <button class="add-to-cart-btn" onclick="quickAddToCart(${s.id}, event)">+</button>
-                </div>`;
-            }).join('');
-        }
-
-        function renderMarquee() {
-            const track = document.getElementById('marquee-track');
-            if(!track) return;
-            track.innerHTML = [...STONES, ...STONES].map(s => `
-                <div class="marquee-item">${getGemSVG(s, 40)}<span>${s.name}</span></div>
+                </div>
             `).join('');
         }
+        renderProducts();
 
-        function toggleWishlist(id, e) {
-            if (e) e.stopPropagation();
-            const idx = wishlist.indexOf(id);
-            if (idx > -1) {
-                wishlist.splice(idx, 1);
-                showToast("Removed from Wishlist");
-            } else {
-                wishlist.push(id);
-                showToast("Added to Wishlist");
-            }
-            localStorage.setItem('nikunj_wishlist', JSON.stringify(wishlist));
-            renderStones();
-            updateWishlistUI();
+        // --- Scroll Logic ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if(window.scrollY > 80) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight * 0.8) el.classList.add('active');
+            });
+        });
+
+        // --- Cart Logic ---
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
         }
 
-        function updateWishlistUI() {
-            const badge = document.getElementById('wishlist-count');
-            if(badge) badge.innerText = wishlist.length;
-            const container = document.getElementById('wishlist-items');
-            if(!container) return;
-            
-            if (wishlist.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:2rem; opacity:0.5;">❤️<br><i style="font-size:0.8rem;">Your wishlist is empty.</i></div>`;
-            } else {
-                container.innerHTML = wishlist.map(id => {
-                    const s = STONES.find(x => x.id === id);
-                    return `<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:0.8rem; border:1px solid var(--gold-border);">
-                        <div style="display:flex; gap:1rem; align-items:center;">
-                            ${getGemSVG(s, 48)}
-                            <div><div style="font-weight:600;">${s.name}</div><div style="font-size:0.7rem; color:var(--gold);">${s.price}/ct</div></div>
-                        </div>
-                        <div style="display:flex; gap:1rem;">
-                            <button class="cta-btn" style="padding:0.4rem 0.8rem; font-size:0.6rem;" onclick="addToCart(${s.id}, 1)">Vault</button>
-                            <button onclick="toggleWishlist(${s.id})" style="background:none; border:none; color:#999; cursor:pointer;">✕</button>
-                        </div>
-                    </div>`;
-                }).join('');
-            }
-        }
-
-        function quickAddToCart(id, e) {
-            if (e) e.stopPropagation();
-            addToCart(id, 1);
-        }
-
-        function addToCart(id, qty = 1) {
+        function addToCart(id) {
             const stone = STONES.find(s => s.id === id);
-            const existing = cart.find(i => i.id === id);
-            if (existing) existing.qty += qty;
-            else cart.push({ id, name: stone.name, hindi: stone.hindi, planet: stone.planet, price: stone.price, priceNum: stone.priceNum, svgPath: stone.svgPath, qty });
+            const existing = cartItems.find(item => item.id === id);
+            if(existing) existing.qty++;
+            else cartItems.push({...stone, qty: 1});
             
-            localStorage.setItem('nikunj_cart', JSON.stringify(cart));
-            updateCartUI();
-            showToast(`${stone.name} added to Vault`);
+            updateCart();
+            showBadgeAnimation();
         }
 
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            const summary = document.getElementById('cart-summary');
-            const badge = document.getElementById('cart-count');
-            let subtotal = 0;
-            let totalQty = 0;
+        function updateCart() {
+            const badge = document.getElementById('cart-badge-count');
+            const totalQty = cartItems.reduce((acc, obj) => acc + obj.qty, 0);
+            badge.innerText = totalQty;
 
-            if(!container) return;
-
-            if (cart.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:3rem; opacity:0.3;">🛒<br><i>Your vault is empty.</i></div>`;
-                if(summary) summary.innerHTML = "";
-                if(badge) badge.innerText = 0;
+            const content = document.getElementById('cart-content');
+            if(cartItems.length === 0) {
+                content.innerHTML = `<div style="text-align:center; margin-top:100px; opacity:0.5;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    <p style="margin-top:20px;">Your vault awaits its first gem</p>
+                </div>`;
+                document.getElementById('cart-subtotal').innerText = "₹0";
                 return;
             }
 
-            container.innerHTML = cart.map(item => {
-                const s = STONES.find(x => x.id === item.id) || item; 
-                const lineTotal = s.priceNum * item.qty;
-                subtotal += lineTotal;
-                totalQty += item.qty;
-                return `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:1rem; border:1px solid var(--gold-border);">
-                    <div style="display:flex; gap:1rem; align-items:center;">
-                        ${getGemSVG(s, 48)}
-                        <div>
-                            <div class="brand-font" style="font-size:0.9rem;">${s.name}</div>
-                            <div style="font-size:0.7rem; color:var(--gold); text-transform:uppercase;">${s.planet}</div>
+            content.innerHTML = cartItems.map(item => `
+                <div class="cart-item">
+                    <div>
+                        <div style="font-weight:600;">${item.name}</div>
+                        <div style="font-size:0.7rem; color:var(--cream-dim);">${item.weight}</div>
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
                         </div>
                     </div>
-                    <div style="display:flex; align-items:center; gap:1rem;">
-                        <div style="display:flex; align-items:center; border:1px solid var(--gold-border);">
-                            <button onclick="changeQty(${s.id}, -1)" style="padding:0.2rem 0.6rem; background:none; border:none; color:white;">−</button>
-                            <span style="font-size:0.8rem; min-width:30px; text-align:center;">${item.qty}ct</span>
-                            <button onclick="changeQty(${s.id}, 1)" style="padding:0.2rem 0.6rem; background:none; border:none; color:white;">+</button>
-                        </div>
-                        <div style="font-weight:600; min-width:80px; text-align:right;">₹${lineTotal.toLocaleString('en-IN')}</div>
-                        <button onclick="removeFromCart(${s.id})" style="background:none; border:none; color:#555; cursor:pointer; font-size:1.2rem;">✕</button>
+                    <div style="text-align:right;">
+                        <div style="color:var(--gold-light); font-weight:600;">₹${(item.price * item.qty).toLocaleString()}</div>
+                        <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:#555; cursor:pointer; margin-top:5px;">&times; Remove</button>
                     </div>
-                </div>`;
-            }).join('');
+                </div>
+            `).join('');
 
-            const shipping = subtotal >= 50000 ? 0 : 500;
-            const gst = subtotal * 0.03;
-            const grand = subtotal + shipping + gst;
-            checkoutTotal = grand;
-
-            summary.innerHTML = `
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.5rem;"><span>Subtotal</span><span>₹${subtotal.toLocaleString('en-IN')}</span></div>
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.5rem;"><span>Shipping</span><span>${shipping === 0 ? 'FREE' : '₹'+shipping}</span></div>
-                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:0.5rem;"><span>GST (3%)</span><span>₹${gst.toLocaleString('en-IN')}</span></div>
-                <div style="display:flex; justify-content:space-between; font-size:1.2rem; color:var(--gold); font-weight:700; border-top:1px solid var(--gold-border); padding-top:1rem; margin-top:0.5rem;">
-                    <span>Grand Total</span><span>₹${grand.toLocaleString('en-IN')}</span>
-                </div>`;
-            if(badge) badge.innerText = totalQty;
+            const subtotal = cartItems.reduce((acc, obj) => acc + (obj.price * obj.qty), 0);
+            document.getElementById('cart-subtotal').innerText = "₹" + subtotal.toLocaleString();
         }
 
         function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty = Math.max(1, Math.min(50, item.qty + delta));
-                localStorage.setItem('nikunj_cart', JSON.stringify(cart));
-                updateCartUI();
-            }
+            const item = cartItems.find(i => i.id === id);
+            item.qty += delta;
+            if(item.qty <= 0) removeFromCart(id);
+            else updateCart();
         }
 
         function removeFromCart(id) {
-            cart = cart.filter(i => i.id !== id);
-            localStorage.setItem('nikunj_cart', JSON.stringify(cart));
-            updateCartUI();
+            cartItems = cartItems.filter(item => item.id !== id);
+            updateCart();
         }
 
-        function openCheckout() {
-            if (cart.length === 0) return showToast("Vault is empty");
-            toggleModal('cartModal');
-            toggleModal('checkoutModal');
-            nextCheckoutStep(1);
+        function showBadgeAnimation() {
+            const badge = document.getElementById('cart-badge-count');
+            badge.style.transform = 'scale(1.4)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 300);
         }
 
-        function nextCheckoutStep(step) {
-            document.getElementById('checkout-step-1').style.display = 'none';
-            document.getElementById('checkout-step-2').style.display = 'none';
-            document.getElementById('checkout-step-3').style.display = 'none';
-            document.getElementById(`checkout-step-${step}`).style.display = 'block';
-            
-            ['step1-tab', 'step2-tab', 'step3-tab'].forEach((id, idx) => {
-                const el = document.getElementById(id);
-                if (idx + 1 === step) { el.style.color = 'var(--gold)'; el.style.borderBottom = '2px solid var(--gold)'; }
-                else if (idx + 1 < step) { el.style.color = 'var(--gold)'; el.innerHTML = el.innerHTML.replace('①','✓').replace('②','✓'); el.style.borderBottom = 'none'; }
-                else { el.style.color = '#555'; el.style.borderBottom = 'none'; }
-            });
-
-            if (step === 2) updateCheckoutSummary();
-        }
-
-        function updateCheckoutSummary() {
-            const container = document.getElementById('checkout-summary-items');
-            const totalEl = document.getElementById('checkout-totals');
-            if(!container || !totalEl) return;
-            let subtotal = 0;
-            
-            container.innerHTML = cart.map(item => {
-                const s = STONES.find(x => x.id === item.id) || item;
-                const line = s.priceNum * item.qty;
-                subtotal += line;
-                return `<div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>${s.name} (${item.qty}ct)</span><span>₹${line.toLocaleString('en-IN')}</span></div>`;
-            }).join('');
-
-            totalEl.innerHTML = `<div style="display:flex; justify-content:space-between; color:var(--gold); font-size:1.1rem; font-weight:700; border-top:1px solid var(--gold-border); padding-top:1rem; margin-top:1rem;">
-                <span>Total Payable</span><span>₹${checkoutTotal.toLocaleString('en-IN')}</span>
-            </div>`;
-        }
-
-        function closeCheckout() {
-            toggleModal('checkoutModal');
-            scrollToSection('collection');
-        }
-
-        // --- Calculator Logic ---
-
-        let calcUnit = 'g';
-        let estQuality = 1.0;
-
-        function setCalcUnit(unit) {
-            calcUnit = unit;
-            document.getElementById('toggle-g').classList.toggle('active', unit === 'g');
-            document.getElementById('toggle-mg').classList.toggle('active', unit === 'mg');
-            document.getElementById('res-alt-label').innerText = unit === 'g' ? 'Milligrams' : 'Grams';
-            updateConverter();
-        }
-
-        function updateConverter() {
-            const input = parseFloat(document.getElementById('calc-input').value) || 0;
-            let carats = 0;
-            let ratti = 0;
-            let altVal = 0;
-
-            if (calcUnit === 'g') {
-                carats = input * 5;
-                altVal = input * 1000;
-            } else {
-                carats = input / 200;
-                altVal = input / 1000;
-            }
-            ratti = carats / 0.91;
-
-            document.getElementById('res-carat').innerText = carats.toFixed(2);
-            document.getElementById('res-ratti').innerText = ratti.toFixed(2);
-            document.getElementById('res-alt-val').innerText = altVal.toLocaleString();
-        }
-
-        function updateEstimator() {
-            const stoneId = parseInt(document.getElementById('est-stone-select').value);
-            const weight = parseFloat(document.getElementById('est-input').value) || 0;
-            const unit = document.getElementById('est-unit').value;
-            const stone = STONES.find(s => s.id === stoneId);
-
-            let carats = weight;
-            if (unit === 'g') carats = weight * 5;
-            if (unit === 'mg') carats = weight / 200;
-
-            const total = carats * stone.priceNum * estQuality;
-            document.getElementById('est-breakdown').innerText = `${carats.toFixed(2)}ct × ${stone.priceNum.toLocaleString()}/ct × ${estQuality}x`;
-            document.getElementById('est-total-price').innerText = '₹' + Math.round(total).toLocaleString('en-IN');
-        }
-
-        function setQualityGrade(multiplier, btn) {
-            estQuality = multiplier;
-            document.querySelectorAll('.quality-card').forEach(c => c.classList.remove('active'));
-            btn.classList.add('active');
-            updateEstimator();
-        }
-
-        function resetCalculator() {
-            document.getElementById('calc-input').value = "";
-            document.getElementById('est-input').value = "";
-            updateConverter();
-            updateEstimator();
-            showToast("Calculator reset to zero.");
-        }
-
-        function addEstimatorToCart() {
-            const weight = parseFloat(document.getElementById('est-input').value) || 0;
-            if(weight <= 0) return showToast("Please enter a weight first");
-            
-            const stoneId = parseInt(document.getElementById('est-stone-select').value);
-            const unit = document.getElementById('est-unit').value;
-            const stone = STONES.find(s => s.id === stoneId);
-
-            let carats = weight;
-            if (unit === 'g') carats = weight * 5;
-            if (unit === 'mg') carats = weight / 200;
-
-            // Adding custom weight to cart
-            const item = { 
-                id: stone.id, 
-                name: stone.name, 
-                hindi: stone.hindi, 
-                planet: stone.planet, 
-                price: stone.price, 
-                priceNum: stone.priceNum, 
-                svgPath: stone.svgPath, 
-                qty: Math.ceil(carats) 
-            };
-            
-            const existing = cart.find(i => i.id === item.id);
-            if(existing) existing.qty += item.qty;
-            else cart.push(item);
-
-            localStorage.setItem('nikunj_cart', JSON.stringify(cart));
-            updateCartUI();
-            showToast(`${item.qty}ct of ${stone.name} added to Vault`);
-            toggleModal('cartModal');
-        }
-
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if(el) el.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // --- Initialization ---
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) nav.style.background = 'rgba(10,14,20,0.95)';
-            else nav.style.background = 'linear-gradient(to bottom, rgba(10,14,20,0.9), transparent)';
+        // --- AI Recommendation ---
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => chip.classList.toggle('active'));
         });
 
-        window.onload = () => {
-            // Restore state
-            cart = JSON.parse(localStorage.getItem('nikunj_cart')) || [];
-            wishlist = JSON.parse(localStorage.getItem('nikunj_wishlist')) || [];
-            
-            // Populate select
-            const select = document.getElementById('est-stone-select');
-            if(select) {
-                select.innerHTML = STONES.map(s => `<option value="${s.id}">${s.name} (${s.hindi}) — ${s.price}/ct</option>`).join('');
-            }
+        async function revealGemstone() {
+            const input = document.getElementById('ai-input').value;
+            const chips = Array.from(document.querySelectorAll('.chip.active')).map(c => c.dataset.val);
+            if(!input && chips.length === 0) return alert("Please select an aspiration or describe your situation.");
 
-            // Render components
-            renderStones();
-            renderMarquee();
-            updateCartUI();
-            updateWishlistUI();
-            
-            // Initialize Calculator
-            updateConverter();
-            updateEstimator();
-        };
-
-        function setPrompt(text) {
-            document.getElementById('ai-prompt').value = text;
-        }
-
-        function aiSearch() {
-            const prompt = document.getElementById('ai-prompt').value.toLowerCase();
-            if (!prompt) return;
-            let bestMatch = STONES[0];
-            let maxScore = 0;
-            STONES.forEach(s => {
-                let score = 0;
-                s.keywords.forEach(k => { if (prompt.includes(k.toLowerCase())) score += 2; });
-                if (prompt.includes(s.name.toLowerCase())) score += 5;
-                if (prompt.includes(s.planet.toLowerCase())) score += 1;
-                if (score > maxScore) { maxScore = score; bestMatch = s; }
-            });
-            showToast(`The cosmic alignment suggests ${bestMatch.name}...`);
-            setTimeout(() => openStoneModal(bestMatch.id), 1000);
-        }
-
-
-        // --- Chatbot ---
-        function toggleChat() {
-            const panel = document.getElementById('chat-panel');
-            panel.classList.toggle('active');
-            if (panel.classList.contains('active') && chatHistory.length === 0) {
-                setTimeout(() => {
-                    addAiMessage("Namaste! I am your Nikunj AI guide. How may I assist your spiritual journey into gemstones today?");
-                    showSuggestionChips();
-                }, 500);
-            }
-        }
-
-        function addAiMessage(text) {
-            const box = document.getElementById('chat-messages');
-            box.innerHTML += `<div class="msg ai">${text}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function showSuggestionChips() {
-            const box = document.getElementById('chat-messages');
-            box.innerHTML += `<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin-top:10px;">
-                <div class="chip" onclick="handleChip('Which stone suits me?')">Which stone suits me?</div>
-                <div class="chip" onclick="handleChip('What is Neelam?')">What is Neelam?</div>
-                <div class="chip" onclick="handleChip('Is it real?')">Is it real?</div>
-            </div>`;
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function handleChip(text) {
-            document.getElementById('chat-input').value = text;
-            sendChatMessage();
-        }
-
-        async function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-            
-            const box = document.getElementById('chat-messages');
-            box.innerHTML += `<div class="msg user">${text}</div>`;
-            input.value = "";
-            box.scrollTop = box.scrollHeight;
-
-            chatHistory.push({ role: "user", content: text });
-            
-            const typing = document.createElement('div');
-            typing.className = 'msg ai';
-            typing.innerText = '•••';
-            box.appendChild(typing);
+            const loader = document.getElementById('ai-loading');
+            const resultBox = document.getElementById('ai-result');
+            loader.style.display = 'block';
+            resultBox.style.display = 'none';
 
             try {
+                const prompt = `Aspiration: ${chips.join(', ')}. Situation: ${input}`;
                 const response = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': 'REPLACE_WITH_KEY',
+                        'anthropic-version': '2023-06-01',
+                        'anthropic-dangerous-direct-browser-access': 'true'
+                    },
                     body: JSON.stringify({
                         model: "claude-3-5-sonnet-20240620",
-                        max_tokens: 400,
-                        messages: chatHistory,
-                        system: "You are Nikunj AI consultant. Be mystical, warm, and concise. Use Hindi names like Pukhraj, Manikya. Under 100 words."
+                        max_tokens: 1000,
+                        system: "You are a Vedic astrologer and gemologist specializing in Navratan gemstones. Based on the user's aspiration or life situation, recommend 1–2 specific gemstones from the Navratna system (Ruby, Pearl, Red Coral, Emerald, Yellow Sapphire, Diamond, Blue Sapphire, Hessonite, Cat's Eye). Explain the planetary association, wearing instructions (metal, finger, day), and how it addresses their need. Keep response under 200 words. Be mystical yet grounded.",
+                        messages: [{ role: "user", content: prompt }]
                     })
                 });
+
                 const data = await response.json();
-                typing.remove();
-                addAiMessage(data.content[0].text);
-                chatHistory.push({ role: "assistant", content: data.content[0].text });
-                sessionStorage.setItem('nikunj_chat', JSON.stringify(chatHistory));
-            } catch (e) {
-                typing.innerText = "The cosmic connection is momentarily disrupted. Please try again.";
+                loader.style.display = 'none';
+                resultBox.style.display = 'block';
+                typeWriterEffect(data.content[0].text, resultBox);
+
+            } catch (err) {
+                loader.style.display = 'none';
+                resultBox.style.display = 'block';
+                resultBox.innerText = "The stars are momentarily clouded. Please try again or visit us in the vault.";
             }
         }
 
-        function openStoneModal(id) {
-            const s = STONES.find(x => x.id === id);
-            const isWish = wishlist.includes(id);
-            document.getElementById('stone-modal-body').innerHTML = `
-                <span class="close-modal" onclick="toggleModal('stoneModal')">&times;</span>
-                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;" class="stone-modal-grid">
-                    <div style="text-align:center; padding: 2rem;">
-                        <div style="background:radial-gradient(circle, ${s.glow} 0%, transparent 70%); border-radius:50%; padding:20px;">
-                            ${getGemSVG(s, 320)}
-                        </div>
-                        <h1 class="brand-font" style="color:var(--gold); margin-top:2.5rem; letter-spacing:8px; font-size:2.5rem;">${s.sanskrit}</h1>
-                        <p style="font-family:'Cormorant Garamond', serif; font-style:italic; color:#888; font-size:1.2rem; margin-top:0.5rem;">${s.hindi} &bull; The Essence of ${s.planet}</p>
-                    </div>
-                    <div>
-                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem;">
-                            <div>
-                                <h2 class="brand-font" style="font-size:3.5rem; margin-bottom:0.2rem; line-height:1;">${s.name}</h2>
-                                <div style="color:var(--gold); letter-spacing:0.2em; font-size:0.75rem; text-transform:uppercase;">Category: ${s.category} | Planet: ${s.planet}</div>
-                            </div>
-                            <button onclick="toggleWishlist(${s.id}, event); openStoneModal(${s.id});" style="background:none; border:none; font-size:2.5rem; color:${isWish ? '#e0115f' : '#333'}; cursor:pointer; transition:0.3s;">
-                                ${isWish ? '❤️' : '♡'}
-                            </button>
-                        </div>
-                        
-                        <p style="margin-bottom:2.5rem; font-family:'Cormorant Garamond', serif; font-size:1.3rem; font-style:italic; line-height:1.6; color:#ccc;">"${s.desc}"</p>
-                        
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom:2.5rem;">
-                            <div style="border:1px solid rgba(255,255,255,0.05); padding:1rem; background:rgba(255,255,255,0.02);">
-                                <div style="font-size:0.6rem; color:#666; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">Qualities</div>
-                                <div style="display:flex; flex-wrap:wrap; gap:5px;">
-                                    ${s.keywords.map(k => `<span style="font-size:0.65rem; color:var(--gold); border:1px solid var(--gold-border); padding:2px 6px;">${k}</span>`).join('')}
-                                </div>
-                            </div>
-                            <div style="border:1px solid rgba(255,255,255,0.05); padding:1rem; background:rgba(255,255,255,0.02);">
-                                <div style="font-size:0.6rem; color:#666; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">Availability</div>
-                                <div style="font-size:0.9rem; color:#fff;">${s.stock} Unit(s) In Vault</div>
-                            </div>
-                        </div>
-
-                        <div style="padding: 2rem; border:1px solid var(--gold); background:rgba(201,168,76,0.05); text-align:center;">
-                            <div style="font-size:0.75rem; color:#888; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.5rem;">Investment per Carat</div>
-                            <div class="brand-font" style="font-size:2.8rem; color:var(--gold); margin-bottom:1.5rem;">${s.price}</div>
-                            
-                            <div style="display:flex; gap:1rem; justify-content:center; align-items:center;">
-                                <div style="display:flex; align-items:center; border:1px solid var(--gold-border); background:rgba(0,0,0,0.3);">
-                                    <button onclick="document.getElementById('stone-qty').value = Math.max(1, parseInt(document.getElementById('stone-qty').value)-1)" style="padding:0.8rem 1.2rem; background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">−</button>
-                                    <input type="number" id="stone-qty" value="1" min="1" max="${s.stock}" style="width:60px; text-align:center; background:none; border:none; color:white; font-size:1.1rem; font-family:Cinzel;">
-                                    <button onclick="document.getElementById('stone-qty').value = Math.min(${s.stock}, parseInt(document.getElementById('stone-qty').value)+1)" style="padding:0.8rem 1.2rem; background:none; border:none; color:white; font-size:1.2rem; cursor:pointer;">+</button>
-                                </div>
-                                <button class="cta-btn" style="flex:1; padding:1rem;" onclick="addToCart(${s.id}, parseInt(document.getElementById('stone-qty').value))">Add to Vault →</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            toggleModal('stoneModal');
+        function typeWriterEffect(text, element) {
+            element.innerText = "";
+            let i = 0;
+            const timer = setInterval(() => {
+                element.innerText += text[i];
+                i++;
+                if(i >= text.length) clearInterval(timer);
+            }, 15);
         }
 
-
-        let ordersDB = JSON.parse(localStorage.getItem('nikunj_orders')) || [
-            { id:"NKJ-2026-1001", date:"2026-03-20 10:23", name:"Priya Sharma", email:"priya.sharma@gmail.com", phone:"+91 98765 43210", address:"12 Marine Drive, Mumbai, Maharashtra 400001", items:[{stone:"Ruby",qty:2},{stone:"Pearl",qty:5}], payment:"UPI", amount:61000, delivery:"Standard", status:"Delivered", notes:"" },
-            { id:"NKJ-2026-1002", date:"2026-03-21 14:45", name:"Arjun Mehta", email:"arjun.mehta@yahoo.com", phone:"+91 87654 32109", address:"45 MG Road, Bengaluru, Karnataka 560001", items:[{stone:"Blue Sapphire",qty:3}], payment:"Card", amount:120000, delivery:"Express", status:"Shipped", notes:"" },
-            { id:"NKJ-2026-1003", date:"2026-03-22 09:15", name:"Deepa Nair", email:"deepa.nair@gmail.com", phone:"+91 76543 21098", address:"8 Anna Salai, Chennai, Tamil Nadu 600002", items:[{stone:"Emerald",qty:4}], payment:"Net Banking", amount:100000, delivery:"Standard", status:"Processing", notes:"" },
-            { id:"NKJ-2026-1004", date:"2026-03-23 16:30", name:"Vikram Singh", email:"vikram.singh@hotmail.com", phone:"+91 65432 10987", address:"22 Connaught Place, New Delhi 110001", items:[{stone:"Yellow Sapphire",qty:2}], payment:"UPI", amount:24000, delivery:"White Glove", status:"Confirmed", notes:"" },
-            { id:"NKJ-2026-1005", date:"2026-03-24 11:00", name:"Sunita Patel", email:"sunita.patel@gmail.com", phone:"+91 54321 09876", address:"67 CG Road, Ahmedabad, Gujarat 380006", items:[{stone:"Diamond",qty:1},{stone:"Ruby",qty:1}], payment:"EMI 6mo", amount:103000, delivery:"Express", status:"Processing", notes:"" },
-            { id:"NKJ-2026-1006", date:"2026-03-25 13:20", name:"Rajan Kumar", email:"rajan.kumar@gmail.com", phone:"+91 43210 98765", address:"15 Park Street, Kolkata, West Bengal 700016", items:[{stone:"Hessonite",qty:6}], payment:"COD", amount:27000, delivery:"Standard", status:"Confirmed", notes:"" },
-            { id:"NKJ-2026-1007", date:"2026-03-25 17:45", name:"Meera Joshi", email:"meera.joshi@gmail.com", phone:"+91 32109 87654", address:"90 FC Road, Pune, Maharashtra 411004", items:[{stone:"Cat's Eye",qty:3}], payment:"UPI", amount:24000, delivery:"Standard", status:"Shipped", notes:"" },
-            { id:"NKJ-2026-1008", date:"2026-03-26 08:10", name:"Ankit Gupta", email:"ankit.gupta@gmail.com", phone:"+91 21098 76543", address:"33 Hazratganj, Lucknow, Uttar Pradesh 226001", items:[{stone:"Red Coral",qty:8}], payment:"Card", amount:22400, delivery:"Express", status:"Confirmed", notes:"" }
-        ];
-
-        let dashboardInterval;
-
-        function openAdmin() {
-            toggleModal('adminModal');
-            if (adminAuth) {
-                document.getElementById('admin-gate-view').style.display = 'none';
-                document.getElementById('admin-portal-view').style.display = 'block';
-                switchAdminTab('dashboard');
+        // --- Modals ---
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            setTimeout(() => document.getElementById(id).classList.add('open'), 10);
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+            setTimeout(() => document.getElementById(id).style.display = 'none', 400);
+        }
+        function toggleAuthView() {
+            const login = document.getElementById('loginView');
+            const register = document.getElementById('registerView');
+            if(login.style.display === 'none') {
+                login.style.display = 'block';
+                register.style.display = 'none';
             } else {
-                document.getElementById('admin-gate-view').style.display = 'block';
-                document.getElementById('admin-portal-view').style.display = 'none';
+                login.style.display = 'none';
+                register.style.display = 'block';
             }
         }
 
-        function submitAdminAuth() {
-            const email = document.getElementById('admin-email-field').value;
-            const pwd = document.getElementById('admin-pwd-field').value;
-            if (email === adminCredentials.email && pwd === adminCredentials.pwd) {
-                adminAuth = true;
-                sessionStorage.setItem('nikunj_admin_auth', 'true');
-                openAdmin();
-            } else {
-                const gate = document.getElementById('admin-gate-view');
-                gate.style.animation = 'none';
-                void gate.offsetWidth;
-                gate.style.animation = 'shake 0.4s ease';
-                document.getElementById('admin-login-err').style.display = 'block';
+        // --- Admin ---
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            if(panel.style.display === 'grid') panel.style.display = 'none';
+            else {
+                panel.style.display = 'grid';
+                switchAdminTab('dashboard', document.querySelector('.sidebar-nav li:first-child'));
             }
         }
 
-        function adminSignOut() {
-            adminAuth = false;
-            sessionStorage.removeItem('nikunj_admin_auth');
-            clearInterval(dashboardInterval);
-            openAdmin();
-        }
+        function switchAdminTab(tab, el) {
+            document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+            el.classList.add('active');
 
-        function switchAdminTab(slug) {
-            const body = document.getElementById('admin-tab-content');
-            document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
-            document.getElementById(`tab-${slug}`).classList.add('active');
-            
-            clearInterval(dashboardInterval);
-            let html = "";
-            switch(slug) {
-                case 'dashboard': 
-                    html = renderAdminDashboard();
-                    dashboardInterval = setInterval(() => {
-                        if (document.getElementById('admin-portal-view').style.display === 'block') {
-                            body.innerHTML = renderAdminDashboard();
-                        }
-                    }, 30000);
-                    break;
-                case 'orders': html = renderAdminOrders(); break;
-                case 'inventory': html = renderAdminInventory(); break;
-                case 'customers': html = renderAdminCustomers(); break;
-                case 'analytics': html = renderAdminAnalytics(); break;
-                case 'site-editor': html = renderAdminSiteEditor(); break;
-                case 'settings': html = renderAdminSettings(); break;
-            }
-            body.innerHTML = html;
-        }
-
-        function renderAdminDashboard() {
-            const rev = ordersDB.reduce((sum, o) => sum + o.amount, 0);
-            const customers = new Set(ordersDB.map(o => o.email)).size;
-            const stock = stones.reduce((sum, s) => sum + s.stock, 0);
-            return `
-                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-bottom:3rem;">
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <div style="font-size:0.65rem; color:#888; text-transform:uppercase;">Total Orders</div>
-                        <div style="font-size:1.8rem; color:var(--gold); font-family:Cinzel;">${ordersDB.length}</div>
+            const view = document.getElementById('admin-view');
+            if(tab === 'dashboard') {
+                view.innerHTML = `
+                    <h2 style="margin-bottom:40px;">Divine Dashboard</h2>
+                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+                        <div style="background:var(--bg-secondary); padding:30px; border:1px solid var(--border-gold); text-align:center;">
+                            <div class="brand-font" style="font-size:0.7rem; color:var(--gold-dark);">Total Orders</div>
+                            <div style="font-size:2rem; font-family:Playfair Display;">128</div>
+                        </div>
+                        <div style="background:var(--bg-secondary); padding:30px; border:1px solid var(--border-gold); text-align:center;">
+                            <div class="brand-font" style="font-size:0.7rem; color:var(--gold-dark);">Revenue</div>
+                            <div style="font-size:2rem; font-family:Playfair Display;">₹24,50,000</div>
+                        </div>
+                        <div style="background:var(--bg-secondary); padding:30px; border:1px solid var(--border-gold); text-align:center;">
+                            <div class="brand-font" style="font-size:0.7rem; color:var(--gold-dark);">Stones</div>
+                            <div style="font-size:2rem; font-family:Playfair Display;">9</div>
+                        </div>
+                        <div style="background:var(--bg-secondary); padding:30px; border:1px solid var(--border-gold); text-align:center;">
+                            <div class="brand-font" style="font-size:0.7rem; color:var(--gold-dark);">Customers</div>
+                            <div style="font-size:2rem; font-family:Playfair Display;">340</div>
+                        </div>
                     </div>
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <div style="font-size:0.65rem; color:#888; text-transform:uppercase;">Revenue</div>
-                        <div style="font-size:1.8rem; color:var(--gold); font-family:Cinzel;">₹${rev.toLocaleString('en-IN')}</div>
-                    </div>
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <div style="font-size:0.65rem; color:#888; text-transform:uppercase;">Customers</div>
-                        <div style="font-size:1.8rem; color:var(--gold); font-family:Cinzel;">${customers}</div>
-                    </div>
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <div style="font-size:0.65rem; color:#888; text-transform:uppercase;">Stones in Stock</div>
-                        <div style="font-size:1.8rem; color:var(--gold); font-family:Cinzel;">${stock}</div>
-                    </div>
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-                    <h3 class="brand-font" style="font-size:1rem; color:var(--gold-light);">
-                        <span style="display:inline-block; width:10px; height:10px; background:#00ff00; border-radius:50%; margin-right:10px; animation:pulse 2s infinite;"></span>
-                        Live Orders Feed
-                    </h3>
-                    <div style="font-size:0.65rem; color:#555;">Refreshed: ${new Date().toLocaleTimeString()}</div>
-                </div>
-                <div style="overflow-x:auto;">
-                    <table style="width:100%; text-align:left; border-collapse:collapse;">
+                `;
+            } else if(tab === 'inventory') {
+                view.innerHTML = `
+                    <h2 style="margin-bottom:40px;">Inventory Status</h2>
+                    <table style="width:100%; border-collapse:collapse; background:var(--bg-secondary); border:1px solid var(--border-gold);">
                         <thead>
-                            <tr style="border-bottom:1px solid var(--gold-border); font-size:0.65rem; text-transform:uppercase; color:#888;">
-                                <th style="padding:1rem;">Order ID</th><th style="padding:1rem;">Customer</th><th style="padding:1rem;">Items</th><th style="padding:1rem;">Amount</th><th style="padding:1rem;">Status</th>
+                            <tr style="border-bottom:1px solid var(--border-gold); font-family:Cinzel; font-size:0.6rem; color:var(--gold-primary); text-align:left;">
+                                <th style="padding:20px;">Stone</th><th>Planet</th><th>Price</th><th>Ratti</th><th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${ordersDB.slice().reverse().map(o => `
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.8rem;">
-                                    <td style="padding:1rem; color:var(--gold);">${o.id}</td>
-                                    <td style="padding:1rem;">${o.name}</td>
-                                    <td style="padding:1rem; font-size:0.75rem;">${o.items.map(i => i.stone).join(', ')}</td>
-                                    <td style="padding:1rem;">₹${o.amount.toLocaleString('en-IN')}</td>
-                                    <td style="padding:1rem;"><span style="padding:2px 8px; font-size:0.6rem; background:rgba(201,168,76,0.1); color:var(--gold);">${o.status}</span></td>
+                            ${STONES.map(s => `
+                                <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding:20px;">${s.name}</td><td>${s.planet}</td><td>${s.priceStr}</td><td>${s.weight}</td>
+                                    <td><span style="color:#2ecc71;">In Stock</span></td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
-                </div>`;
-        }
-
-        function renderAdminOrders() {
-            return `
-                <div style="display:flex; gap:1rem; margin-bottom:2rem;">
-                    <input type="text" placeholder="Search by name, email or ID..." id="order-search" oninput="filterOrders()" style="flex:1;">
-                    <select id="order-status-filter" onchange="filterOrders()" style="width:200px;">
-                        <option value="All">All Status</option><option>Confirmed</option><option>Processing</option><option>Shipped</option><option>Delivered</option>
-                    </select>
-                    <button class="cta-btn" onclick="exportOrdersCSV()" style="font-size:0.65rem;">Export CSV</button>
-                </div>
-                <div id="orders-table-container">
-                    ${renderOrdersTable(ordersDB)}
-                </div>`;
-        }
-
-        function filterOrders() {
-            const query = document.getElementById('order-search').value.toLowerCase();
-            const status = document.getElementById('order-status-filter').value;
-            const filtered = ordersDB.filter(o => {
-                const matchQuery = o.name.toLowerCase().includes(query) || o.email.toLowerCase().includes(query) || o.id.toLowerCase().includes(query);
-                const matchStatus = status === 'All' || o.status === status;
-                return matchQuery && matchStatus;
-            });
-            document.getElementById('orders-table-container').innerHTML = renderOrdersTable(filtered);
-        }
-
-        function exportOrdersCSV() {
-            const headers = ["Order ID", "Date", "Customer", "Email", "Amount", "Status"];
-            const rows = ordersDB.map(o => [o.id, o.date, o.name, o.email, o.amount, o.status]);
-            const csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "\n" + rows.map(r => r.join(",")).join("\n");
-            const link = document.createElement("a");
-            link.setAttribute("href", encodeURI(csvContent));
-            link.setAttribute("download", "nikunj_orders.csv");
-            document.body.appendChild(link);
-            link.click();
-            showToast("Orders exported successfully");
-        }
-
-        function renderOrdersTable(data) {
-            return `
-                <table style="width:100%; border-collapse:collapse; min-width:800px;">
-                    <thead>
-                        <tr style="border-bottom:1px solid var(--gold-border); font-size:0.65rem; text-transform:uppercase; color:#888;">
-                            <th style="padding:1rem;">Order ID</th><th>Date</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th><th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${data.slice().reverse().map(o => `
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.8rem;">
-                                <td style="padding:1rem; color:var(--gold);">${o.id}</td>
-                                <td style="padding:1rem;">${o.date}</td>
-                                <td style="padding:1rem;">${o.name}<br><small style="color:#555;">${o.email}</small></td>
-                                <td style="padding:1rem; font-size:0.7rem;">${o.items.map(i => `${i.qty}ct ${i.stone}`).join(', ')}</td>
-                                <td style="padding:1rem;">₹${o.amount.toLocaleString('en-IN')}</td>
-                                <td style="padding:1rem;">
-                                    <select onchange="updateOrderStatus('${o.id}', this.value)" style="padding:4px; font-size:0.7rem; background:none; border:1px solid var(--gold-border); color:var(--white);">
-                                        <option ${o.status==='Confirmed'?'selected':''}>Confirmed</option>
-                                        <option ${o.status==='Processing'?'selected':''}>Processing</option>
-                                        <option ${o.status==='Shipped'?'selected':''}>Shipped</option>
-                                        <option ${o.status==='Delivered'?'selected':''}>Delivered</option>
-                                    </select>
-                                </td>
-                                <td style="padding:1rem;"><button class="outline-btn" style="font-size:0.6rem; padding:4px 8px; border:1px solid var(--gold); background:none; color:var(--gold); cursor:pointer;" onclick="viewOrderDetails('${o.id}')">DETAILS</button></td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>`;
-        }
-
-        function viewOrderDetails(id) {
-            const o = ordersDB.find(x => x.id === id);
-            alert(`Customer: ${o.name}\nAddress: ${o.address}\nPayment: ${o.payment}\nItems: ${o.items.map(i => i.qty+'ct '+i.stone).join(',')}`);
-        }
-
-        function renderAdminInventory() {
-            return `
-                <table style="width:100%; border-collapse:collapse; margin-bottom:3rem;">
-                    <thead>
-                        <tr style="border-bottom:1px solid var(--gold-border); font-size:0.65rem; text-transform:uppercase; color:#888;">
-                            <th style="padding:1rem;">Stone</th><th>Hindi Name</th><th>Planet</th><th>Price/ct (₹)</th><th>Stock (ct)</th><th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${stones.map(s => `
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.8rem;">
-                                <td style="padding:1rem;">${s.name}</td>
-                                <td style="padding:1rem;">${s.hindi} (${s.sanskrit})</td>
-                                <td style="padding:1rem; font-family:Cinzel; font-size:0.75rem; color:var(--gold);">${s.planet}</td>
-                                <td style="padding:1rem;"><input type="number" value="${s.priceNum}" style="width:90px; padding:4px; font-size:0.8rem;" onchange="updateStonePrice(${s.id}, this.value)"></td>
-                                <td style="padding:1rem;"><input type="number" value="${s.stock}" style="width:70px; padding:4px; font-size:0.8rem;" onchange="updateStoneStock(${s.id}, this.value)"></td>
-                                <td style="padding:1rem;">
-                                    <span style="font-size:0.6rem; padding:4px 10px; border:1px solid ${s.stock > 5 ? 'var(--gold)' : '#ff4444'}; color:${s.stock > 5 ? 'var(--gold)' : '#ff4444'}">
-                                        ${s.stock > 5 ? 'IN STOCK' : 'LOW STOCK'}
-                                    </span>
-                                </td>
-                            </tr>
-                        `).join('')}
-
-                    </tbody>
-                </table>
-                <div style="background:var(--navy-light); padding:2rem; border:1px solid var(--gold-border);">
-                    <h4 class="brand-font" style="margin-bottom:1.5rem; color:var(--gold);">Quick Add Stone</h4>
-                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
-                        <input type="text" id="new-stone-name" placeholder="Gem Name">
-                        <input type="text" id="new-stone-hindi" placeholder="Hindi Name">
-                        <input type="number" id="new-stone-price" placeholder="Price/ct">
-                        <input type="number" id="new-stone-stock" placeholder="Initial Stock">
+                `;
+            } else {
+                view.innerHTML = `
+                    <div style="height:400px; display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0.3;">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <h3 class="brand-font" style="margin-top:20px;">Coming Soon</h3>
                     </div>
-                    <button class="cta-btn" onclick="addNewStone()" style="font-size:0.7rem;">Inject into Collection</button>
-                </div>`;
-        }
-
-        function updateStonePrice(id, val) {
-            const s = stones.find(x => x.id === id);
-            if(s) {
-                s.priceNum = parseInt(val);
-                s.price = `₹${s.priceNum.toLocaleString('en-IN')}`;
-                showToast("Price alignment updated");
-                renderStones();
+                `;
             }
         }
 
-        function updateStoneStock(id, val) {
-            stones.find(s => s.id === id).stock = parseInt(val);
-            showToast("Inventory stock synchronized.");
-            renderStones();
+        function checkout() {
+            if(cartItems.length === 0) return alert("Your vault is empty.");
+            alert("Proceeding to secure checkout portal...");
         }
 
-
-        function addNewStone() {
-            const n = document.getElementById('new-stone-name').value;
-            const h = document.getElementById('new-stone-hindi').value;
-            const p = parseInt(document.getElementById('new-stone-price').value);
-            const s = parseInt(document.getElementById('new-stone-stock').value);
-            if (!n || !p) return showToast("Name and Price required");
-            stones.push({ 
-                id: Date.now(), name: n, hindi: h, sanskrit: h, 
-                price: `₹${p.toLocaleString()}`, priceNum: p, 
-                stock: s, color: "#999", planet: "Mercury", 
-                keywords: ["New"], desc: "Added via Sanctum",
-                category: "Added", glow: "rgba(255,255,255,0.2)", tint: "rgba(255,255,255,0.05)",
-                svgPath: "M50 5 L85 25 L85 75 L50 95 L15 75 L15 25 Z"
-            });
-            renderStones();
-            switchAdminTab('inventory');
-            showToast(`New ${n} added to collection`);
-        }
-
-
-        function renderAdminCustomers() {
-            const customersMap = {};
-            ordersDB.forEach(o => {
-                if (!customersMap[o.email]) customersMap[o.email] = { name: o.name, email:o.email, phone:o.phone, totalOrders:0, totalSpent:0, lastDate:o.date };
-                customersMap[o.email].totalOrders++;
-                customersMap[o.email].totalSpent += o.amount;
-                if (new Date(o.date) > new Date(customersMap[o.email].lastDate)) customersMap[o.email].lastDate = o.date;
-            });
-            const customerList = Object.values(customersMap);
-            return `
-                <table style="width:100%; border-collapse:collapse;">
-                    <thead>
-                        <tr style="border-bottom:1px solid var(--gold-border); font-size:0.65rem; text-transform:uppercase; color:#888;">
-                            <th style="padding:1rem;">Customer</th><th>Contact</th><th>Orders</th><th>Spend</th><th>Tier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${customerList.map(c => {
-                            let tier = "Bronze";
-                            if (c.totalSpent > 100000) tier = "Gold";
-                            else if (c.totalSpent > 50000) tier = "Silver";
-                            return `<tr style="border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.8rem;">
-                                <td style="padding:1rem;">${c.name}</td>
-                                <td style="padding:1rem;">${c.email}<br><small>${c.phone}</small></td>
-                                <td style="padding:1rem;">${c.totalOrders}</td>
-                                <td style="padding:1rem;">₹${c.totalSpent.toLocaleString('en-IN')}</td>
-                                <td style="padding:1rem;"><span style="color:var(--gold); font-size:0.65rem; border:1px solid var(--gold); padding:2px 6px;">${tier}</span></td>
-                            </tr>`;
-                        }).join('')}
-                    </tbody>
-                </table>`;
-        }
-
-        function renderAdminAnalytics() {
-            const revByStone = {};
-            ordersDB.forEach(o => {
-                o.items.forEach(i => {
-                    const stoneObj = stones.find(s=>s.name===i.stone);
-                    if (stoneObj) revByStone[i.stone] = (revByStone[i.stone] || 0) + (stoneObj.priceNum * i.qty);
-                });
-
-            });
-            const maxRev = Math.max(...Object.values(revByStone));
-            return `
-                <div style="background:var(--navy-light); padding:2rem; border:1px solid var(--gold-border);">
-                    <h4 class="brand-font" style="margin-bottom:2rem; color:var(--gold);">Revenue Performance by Variety</h4>
-                    <div style="display:flex; flex-direction:column; gap:2rem;">
-                        ${Object.entries(revByStone).sort((a,b)=>b[1]-a[1]).map(([name, rev]) => `
-                            <div>
-                                <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:0.75rem;"><span>${name}</span><span>₹${rev.toLocaleString('en-IN')}</span></div>
-                                <div style="flex:1; background:rgba(255,255,255,0.05); height:8px;"><div style="background:var(--gold); height:100%; width:${(rev/maxRev)*100}%; transition:width 1s ease;"></div></div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
-        }
-
-        function renderAdminSiteEditor() {
-            return `
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;">
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <h4 class="brand-font" style="margin-bottom:1.5rem; color:var(--gold);">Typography & Copy</h4>
-                        <div style="display:grid; gap:1rem;">
-                            <div><label style="font-size:0.65rem;">Main Headline</label><input type="text" value="${document.getElementById('hero-h1').innerText}" oninput="document.getElementById('hero-h1').innerText=this.value"></div>
-                            <div><label style="font-size:0.65rem;">Hero Subtext</label><textarea rows="3" oninput="document.getElementById('hero-p').innerText=this.value">${document.getElementById('hero-p').innerText}</textarea></div>
-                            <div><label style="font-size:0.65rem;">CTA Button Label</label><input type="text" value="${document.getElementById('hero-btn').innerText}" oninput="document.getElementById('hero-btn').innerText=this.value"></div>
-                        </div>
-                    </div>
-                    <div style="background:var(--navy-light); padding:1.5rem; border:1px solid var(--gold-border);">
-                        <h4 class="brand-font" style="margin-bottom:1.5rem; color:var(--gold);">Live Modules</h4>
-                        <div style="display:grid; gap:1rem;">
-                            <div><label style="font-size:0.65rem;">Announcement Banner</label><input type="text" id="banner-text" placeholder="e.g. 15% discount for first 10 orders"></div>
-                            <button onclick="updateBanner(document.getElementById('banner-text').value)" class="cta-btn" style="font-size:0.65rem;">Apply Announcement</button>
-                            <div style="margin-top:1rem;"><label style="font-size:0.65rem;">Custom CSS Injection</label><textarea id="admin-css" rows="4" placeholder=".stone-card { border-radius: 20px !important; }"></textarea></div>
-                            <button onclick="injectCSS()" class="cta-btn" style="font-size:0.65rem; background:#444;">Deploy Style Hook</button>
-                        </div>
-                    </div>
-                </div>`;
-        }
-
-        function injectCSS() {
-            const raw = document.getElementById('admin-css').value;
-            let style = document.getElementById('admin-dynamic-styles');
-            if(!style){ style = document.createElement('style'); style.id='admin-dynamic-styles'; document.head.appendChild(style); }
-            style.innerHTML = raw;
-            showToast("Design override applied.");
-        }
-
-        function renderAdminSettings() {
-            return `
-                <div style="max-width:600px;">
-                    <h4 class="brand-font" style="margin-bottom:1.5rem; color:var(--gold);">Access Control</h4>
-                    <div style="display:grid; gap:1rem;">
-                        <div><label style="font-size:0.65rem;">Update Password</label><input type="password" id="new-pwd" placeholder="Enter new sanctum password"></div>
-                        <button onclick="adminCredentials.pwd=document.getElementById('new-pwd').value; showToast('Password updated.')" class="cta-btn">Change Auth Key</button>
-                    </div>
-                    <hr style="border:none; border-top:1px solid var(--gold-border); margin:2rem 0;">
-                    <h4 class="brand-font" style="margin-bottom:1rem; color:#ff4444;">Data Clearance</h4>
-                    <button class="cta-btn" style="background:#442222;" onclick="if(confirm('Wipe all local order history?')) { ordersDB=[]; localStorage.removeItem('nikunj_orders'); switchAdminTab('dashboard'); }">Purge Transactional DB</button>
-                </div>`;
-        }
-
-        function completeOrder() {
-            const id = `NKJ-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-            const name = document.getElementById('chk-name').value;
-            const email = document.getElementById('chk-email').value;
-            const phone = document.getElementById('chk-phone').value;
-            const city = document.getElementById('chk-city').value;
-            const state = document.getElementById('chk-state').value;
-            
-            const newOrder = {
-                id, date: new Date().toLocaleString('en-IN'),
-                name, email, phone, address: `${city}, ${state}`,
-                items: cart.map(i => ({ stone: stones.find(s=>s.id===i.id).name, qty: i.qty })),
-                payment: "UPI", amount: checkoutTotal, delivery: "Standard", status: "Confirmed", notes: ""
-            };
-            
-            ordersDB.push(newOrder);
-            localStorage.setItem('nikunj_orders', JSON.stringify(ordersDB));
-            
-            nextCheckoutStep(3);
-            document.getElementById('conf-order-id').innerText = id;
-            cart = [];
-            localStorage.setItem('nikunj_cart', JSON.stringify(cart));
-            updateCartUI();
-            
-            if (adminAuth) { 
-                showToast(`🔔 New Order Alert: ${id}`);
-                const gear = document.getElementById('admin-gear');
-                gear.style.animation = 'pulse 1s 5';
-                setTimeout(()=>gear.style.animation='', 5000);
-            }
-        }
     </script>
 </body>
 </html>
