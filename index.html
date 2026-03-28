@@ -965,26 +965,40 @@
                     </div>
                     
                     <div style="max-width:800px; margin:0 auto; background:var(--bg-secondary); padding:60px; border:1px solid var(--border-gold);">
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
-                            <div class="field"><label>Full Name</label><input type="text" placeholder="Your Name"></div>
-                            <div class="field"><label>Email Address</label><input type="email" placeholder="email@example.com"></div>
-                        </div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
-                            <div class="field"><label>Phone/WhatsApp</label><input type="text" placeholder="+91 XXXX XXXX"></div>
-                            <div class="field">
-                                <label>Consultation Type</label>
-                                <select style="width:100%; padding:15px; background:var(--bg-primary); border:1px solid var(--border-gold); color:white;">
-                                    <option>Video Call on WhatsApp</option>
-                                    <option>Email Quotation</option>
-                                    <option>In-Person (Jaipur)</option>
-                                </select>
+                        <form onsubmit="event.preventDefault()">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
+                                <div class="field">
+                                    <label>Full Name</label><input type="text" id="enquiryName" placeholder="Your Name">
+                                    <span id="enquiryNameError" style="color:#9B1C1C;font-size:12px;font-family:'Cormorant Garamond',serif;margin-top:4px;display:block;min-height:16px;"></span>
+                                </div>
+                                <div class="field">
+                                    <label>Email Address</label><input type="email" id="enquiryEmail" placeholder="email@example.com">
+                                    <span id="enquiryEmailError" style="color:#9B1C1C;font-size:12px;font-family:'Cormorant Garamond',serif;margin-top:4px;display:block;min-height:16px;"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="field" style="margin-bottom:40px;">
-                            <label>The Call of your Soul (Message)</label>
-                            <textarea style="width:100%; height:150px; background:var(--bg-primary); border:1px solid var(--border-gold); padding:20px; color:white;" placeholder="Describe the aspiration or challenge you seek guidance for..."></textarea>
-                        </div>
-                        <button class="btn-gold fill" style="width:100%;" onclick="showToast('Inquiry Sent. We will contact you shortly.')">Send Sacred Enquiry</button>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-bottom:30px;">
+                                <div class="field">
+                                    <label>Phone/WhatsApp</label><input type="text" id="enquiryPhone" placeholder="+91 XXXX XXXX">
+                                    <span id="enquiryPhoneError" style="color:#9B1C1C;font-size:12px;font-family:'Cormorant Garamond',serif;margin-top:4px;display:block;min-height:16px;"></span>
+                                </div>
+                                <div class="field">
+                                    <label>Consultation Type</label>
+                                    <select id="enquiryType" style="width:100%; padding:15px; background:var(--bg-primary); border:1px solid var(--border-gold); color:white;">
+                                        <option>Video Call on WhatsApp</option>
+                                        <option>Email Quotation</option>
+                                        <option>In-Person (Jaipur)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field" style="margin-bottom:40px;">
+                                <label>The Call of your Soul (Message)</label>
+                                <textarea id="enquiryMessage" style="width:100%; height:150px; background:var(--bg-primary); border:1px solid var(--border-gold); padding:20px; color:white;" placeholder="Describe the aspiration or challenge you seek guidance for..."></textarea>
+                                <span id="enquiryMessageError" style="color:#9B1C1C;font-size:12px;font-family:'Cormorant Garamond',serif;margin-top:4px;display:block;min-height:16px;"></span>
+                            </div>
+                            <button id="enquirySubmitBtn" class="btn-gold fill" style="width:100%;" onclick="handleEnquirySubmit()">Send Sacred Enquiry</button>
+                            <div id="enquirySuccess" style="display:none;"></div>
+                            <div id="enquiryGeneralError" style="display:none;"></div>
+                        </form>
                     </div>
                 </div>
                 ${renderFooter()}
@@ -1363,6 +1377,137 @@
             }).catch(e_api => { btn.disabled = false; if(err) err.innerText = e_api.code === 'auth/wrong-password' ? "Current password incorrect." : e_api.message; });
         }
 
+        async function handleEnquirySubmit() {
+
+          // ── Get values ──────────────────────────────────────────
+          const name            = document.getElementById('enquiryName').value.trim();
+          const email           = document.getElementById('enquiryEmail').value.trim();
+          const phone           = document.getElementById('enquiryPhone').value.trim();
+          const consultationType= document.getElementById('enquiryType').value;
+          const message         = document.getElementById('enquiryMessage').value.trim();
+          const btn             = document.getElementById('enquirySubmitBtn');
+          const successEl       = document.getElementById('enquirySuccess');
+          const generalErrorEl  = document.getElementById('enquiryGeneralError');
+
+          // ── Clear previous messages ──────────────────────────────
+          ['enquiryNameError','enquiryEmailError',
+           'enquiryPhoneError','enquiryMessageError'].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '';
+          });
+          if (successEl)      { successEl.style.display = 'none';      successEl.textContent = '';      }
+          if (generalErrorEl) { generalErrorEl.style.display = 'none'; generalErrorEl.textContent = ''; }
+
+          // ── Validate ─────────────────────────────────────────────
+          let valid = true;
+
+          if (name.length < 2) {
+            document.getElementById('enquiryNameError').textContent = 'Please enter your full name.';
+            valid = false;
+          }
+
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('enquiryEmailError').textContent = 'Enter a valid email address.';
+            valid = false;
+          }
+
+          if (!/^[6-9]\d{9}$/.test(phone.replace(/[\s\-\+]/g, ''))) {
+            document.getElementById('enquiryPhoneError').textContent = 'Enter a valid 10-digit Indian mobile number.';
+            valid = false;
+          }
+
+          if (message.length < 10) {
+            document.getElementById('enquiryMessageError').textContent = 'Please describe your enquiry (min 10 characters).';
+            valid = false;
+          }
+
+          if (!valid) return;
+
+          // ── Loading state ────────────────────────────────────────
+          btn.disabled = true;
+          const originalBtnText = btn.textContent;
+          btn.textContent = 'Sending...';
+
+          // ── Build payload ────────────────────────────────────────
+          const payload = {
+            name:             name,
+            email:            email,
+            phone:            phone,
+            consultationType: consultationType,
+            message:          message,
+            submittedAt:      new Date().toLocaleString('en-IN', {
+                                timeZone:  'Asia/Kolkata',
+                                dateStyle: 'medium',
+                                timeStyle: 'short'
+                              })
+          };
+
+          // ── Make webhook URL ─────────────────────────────────────
+          const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/9lr8deokjomrik4lb599d8wbynh3zeuf';
+          // Example: 'https://hook.eu2.make.com/xxxxxxxxxxxxxxxxxx'
+
+          try {
+            const response = await fetch(MAKE_WEBHOOK_URL, {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify(payload)
+            });
+
+            // Make returns plain text "Accepted" on success
+            const responseText = await response.text();
+            const isSuccess = response.ok || responseText.toLowerCase().includes('accepted');
+
+            if (isSuccess) {
+
+              // Clear all form fields
+              document.getElementById('enquiryName').value    = '';
+              document.getElementById('enquiryEmail').value   = '';
+              document.getElementById('enquiryPhone').value   = '';
+              document.getElementById('enquiryMessage').value = '';
+
+              // Show inline success message
+              if (successEl) {
+                successEl.style.cssText = 'display:block;color:#C9A84C;font-family:"Cormorant Garamond",serif;font-size:16px;margin-top:16px;text-align:center;padding:14px 20px;border:1px solid rgba(201,168,76,0.35);border-radius:10px;background:rgba(201,168,76,0.06);';
+                successEl.textContent = '✦ Enquiry received. Nikunj will contact you within 24 hours.';
+              }
+
+              // Also save to Firestore if available
+              if (typeof db !== 'undefined') {
+                try {
+                  await db.collection('enquiries').add(
+                    Object.assign({}, payload, {
+                      userId:      (loggedInUser && loggedInUser.uid) || 'guest',
+                      submittedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                  );
+                } catch (firestoreErr) {
+                  console.warn('Firestore enquiry save failed:', firestoreErr);
+                }
+              }
+
+              // Show toast notification
+              showToast('Enquiry sent successfully! We will be in touch soon. ✦', 'success');
+
+            } else {
+              throw new Error('Unexpected response: ' + responseText);
+            }
+
+          } catch (err) {
+            console.error('Enquiry error:', err);
+
+            if (generalErrorEl) {
+              generalErrorEl.style.cssText = 'display:block;color:#9B1C1C;font-family:"Cormorant Garamond",serif;font-size:14px;margin-top:12px;text-align:center;';
+              generalErrorEl.textContent = 'Unable to send enquiry. Please try again or email us directly at contact@nikunj.com';
+            }
+
+            showToast('Something went wrong. Please try again.', 'error');
+
+          } finally {
+            btn.disabled      = false;
+            btn.textContent   = originalBtnText;
+          }
+        }
+
         function initSplash() {
             const c = document.getElementById('splash-canvas');
             if(!c) return;
@@ -1413,13 +1558,18 @@
             // Initial sync
             updateNav();
 
-            // History / Popstate Support
             window.onpopstate = (e) => {
                 if(e.state && e.state.view) {
                     currentView = e.state.view;
                     renderView();
                 }
             };
+            
+            // Wire enquiry button if it exists (for dynamic rendering support)
+            const enquiryBtn = document.getElementById('enquirySubmitBtn');
+            if (enquiryBtn) {
+                enquiryBtn.addEventListener('click', handleEnquirySubmit);
+            }
         });
     </script>
 </body>
