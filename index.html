@@ -803,16 +803,114 @@
         }
 
         function getGemMedia(name) {
+            if (name === 'Blue Sapphire') {
+                return `
+                    <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="bsCenter" cx="40%" cy="35%" r="55%">
+                                <stop offset="0%" stop-color="#3A5ABF"/>
+                                <stop offset="50%" stop-color="#1B2A6B"/>
+                                <stop offset="100%" stop-color="#080F2A"/>
+                            </radialGradient>
+                            <radialGradient id="bsGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#A0C0FF" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#1B2A6B" stop-opacity="0"/>
+                            </radialGradient>
+                            <filter id="bsShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0A1030" flood-opacity="0.8"/>
+                            </filter>
+                        </defs>
+                        <ellipse cx="60" cy="60" rx="48" ry="52" fill="url(#bsCenter)" filter="url(#bsShadow)"/>
+                        <ellipse cx="60" cy="60" rx="44" ry="48" fill="url(#bsGlow)"/>
+                        <line x1="60" y1="8" x2="60" y2="112" stroke="#0A1030" stroke-width="0.6" stroke-opacity="0.5"/>
+                        <line x1="12" y1="60" x2="108" y2="60" stroke="#0A1030" stroke-width="0.6" stroke-opacity="0.5"/>
+                        <line x1="22" y1="25" x2="98" y2="95" stroke="#0A1030" stroke-width="0.6" stroke-opacity="0.5"/>
+                        <line x1="98" y1="25" x2="22" y2="95" stroke="#0A1030" stroke-width="0.6" stroke-opacity="0.5"/>
+                        <polygon points="60,28 80,38 88,60 80,82 60,92 40,82 32,60 40,38" fill="none" stroke="#3A5ABF" stroke-width="0.8" stroke-opacity="0.7"/>
+                        <polygon points="60,38 72,45 76,60 72,75 60,82 48,75 44,60 48,45" fill="none" stroke="#A0C0FF" stroke-width="0.5" stroke-opacity="0.4"/>
+                        <line x1="60" y1="42" x2="60" y2="78" stroke="white" stroke-width="1.5" stroke-opacity="0.35"/>
+                        <line x1="43" y1="51" x2="77" y2="69" stroke="white" stroke-width="1.5" stroke-opacity="0.35"/>
+                        <line x1="43" y1="69" x2="77" y2="51" stroke="white" stroke-width="1.5" stroke-opacity="0.35"/>
+                        <ellipse cx="46" cy="36" rx="10" ry="6" fill="white" fill-opacity="0.25" transform="rotate(-20,46,36)"/>
+                        <circle cx="46" cy="36" r="2.5" fill="white" fill-opacity="0.7"/>
+                    </svg>`;
+            }
+            if (name === 'Hessonite') {
+                return `
+                    <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="hessCenter" cx="38%" cy="32%" r="60%">
+                                <stop offset="0%" stop-color="#FFB347"/>
+                                <stop offset="40%" stop-color="#C47A30"/>
+                                <stop offset="100%" stop-color="#3A1A05"/>
+                            </radialGradient>
+                            <radialGradient id="hessGlow" cx="50%" cy="45%" r="50%">
+                                <stop offset="0%" stop-color="#FFB347" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#8B4513" stop-opacity="0"/>
+                            </radialGradient>
+                            <filter id="hessShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A0800" flood-opacity="0.8"/>
+                            </filter>
+                        </defs>
+                        <ellipse cx="60" cy="60" rx="46" ry="50" fill="url(#hessCenter)" filter="url(#hessShadow)"/>
+                        <ellipse cx="60" cy="55" rx="38" ry="40" fill="url(#hessGlow)"/>
+                        <path d="M35,45 Q50,38 65,48 Q80,58 70,68 Q55,78 40,70 Q28,62 35,45" fill="none" stroke="#C47A30" stroke-width="1" stroke-opacity="0.4"/>
+                        <path d="M45,35 Q62,30 72,42 Q82,55 68,62 Q52,70 38,58 Q28,48 45,35" fill="none" stroke="#FFB347" stroke-width="0.8" stroke-opacity="0.3"/>
+                        <path d="M50,72 Q65,65 75,72 Q82,80 70,85 Q55,88 46,80 Q40,74 50,72" fill="none" stroke="#C47A30" stroke-width="0.8" stroke-opacity="0.3"/>
+                        <line x1="60" y1="10" x2="60" y2="110" stroke="#3A1A05" stroke-width="0.5" stroke-opacity="0.5"/>
+                        <line x1="14" y1="60" x2="106" y2="60" stroke="#3A1A05" stroke-width="0.5" stroke-opacity="0.5"/>
+                        <line x1="24" y1="24" x2="96" y2="96" stroke="#3A1A05" stroke-width="0.5" stroke-opacity="0.4"/>
+                        <line x1="96" y1="24" x2="24" y2="96" stroke="#3A1A05" stroke-width="0.5" stroke-opacity="0.4"/>
+                        <polygon points="60,26 82,38 90,60 82,82 60,94 38,82 30,60 38,38" fill="none" stroke="#FFB347" stroke-width="0.8" stroke-opacity="0.5"/>
+                        <ellipse cx="44" cy="38" rx="11" ry="7" fill="white" fill-opacity="0.3" transform="rotate(-25,44,38)"/>
+                        <circle cx="44" cy="38" r="3" fill="white" fill-opacity="0.65"/>
+                        <circle cx="62" cy="58" r="14" fill="#FFB347" fill-opacity="0.12"/>
+                    </svg>`;
+            }
+            if (name === 'Cat\'s Eye') {
+                return `
+                    <svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="ceBase" cx="50%" cy="50%" r="52%">
+                                <stop offset="0%" stop-color="#B8A800"/>
+                                <stop offset="55%" stop-color="#8B8000"/>
+                                <stop offset="100%" stop-color="#2A2600"/>
+                            </radialGradient>
+                            <radialGradient id="ceSurface" cx="50%" cy="35%" r="55%">
+                                <stop offset="0%" stop-color="#D4D000" stop-opacity="0.45"/>
+                                <stop offset="100%" stop-color="#8B8000" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="ceBand" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="white" stop-opacity="0"/>
+                                <stop offset="25%" stop-color="white" stop-opacity="0.35"/>
+                                <stop offset="50%" stop-color="white" stop-opacity="0.85"/>
+                                <stop offset="75%" stop-color="white" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                            </linearGradient>
+                            <filter id="ceBandBlur"><feGaussianBlur stdDeviation="1.5"/></filter>
+                            <filter id="ceShadow">
+                                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A1800" flood-opacity="0.85"/>
+                            </filter>
+                            <clipPath id="ceClip"><ellipse cx="60" cy="60" rx="47" ry="51"/></clipPath>
+                        </defs>
+                        <ellipse cx="60" cy="60" rx="47" ry="51" fill="url(#ceBase)" filter="url(#ceShadow)"/>
+                        <ellipse cx="60" cy="50" rx="43" ry="42" fill="url(#ceSurface)"/>
+                        <rect x="13" y="53" width="94" height="14" fill="url(#ceBand)" filter="url(#ceBandBlur)" clip-path="url(#ceClip)"/>
+                        <rect x="13" y="58" width="94" height="4" fill="white" fill-opacity="0.55" clip-path="url(#ceClip)"/>
+                        <ellipse cx="60" cy="60" rx="18" ry="2.5" fill="white" fill-opacity="0.9"/>
+                        <ellipse cx="48" cy="36" rx="16" ry="9" fill="white" fill-opacity="0.22" transform="rotate(-20,48,36)"/>
+                        <circle cx="46" cy="34" r="4" fill="white" fill-opacity="0.5"/>
+                        <circle cx="46" cy="34" r="1.5" fill="white" fill-opacity="0.9"/>
+                    </svg>`;
+            }
+
             const media = {
                 'Ruby': 'assets/gems/ruby.png',
                 'Pearl': 'assets/gems/pearl.png',
                 'Red Coral': 'assets/gems/coral.png',
                 'Emerald': 'assets/gems/emerald.png',
                 'Yellow Sapphire': 'assets/gems/yellow_sapphire.png',
-                'Diamond': 'assets/gems/diamond.png',
-                'Blue Sapphire': 'https://images.unsplash.com/photo-1620215175664-cb6da2023d7f?q=80&w=1000&auto=format&fit=crop',
-                'Hessonite': 'https://images.unsplash.com/photo-1650393279185-3ba57e93666b?q=80&w=1000&auto=format&fit=crop',
-                'Cat\'s Eye': 'https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?q=80&w=1000&auto=format&fit=crop'
+                'Diamond': 'assets/gems/diamond.png'
             };
             const src = media[name] || '';
             return `<img src="${src}" alt="${name}" style="width:100%; height:100%; object-fit:contain; border-radius:50%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); pointer-events:none;">`;
